@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HI VIEW - Tour 3D Interativo (125,79 m²)</title>
+  <style>
+    :root {
+      --bg: #121316;
+      --panel: rgba(24, 26, 32, 0.88);
+      --panel-border: rgba(255, 255, 255, 0.12);
+      --accent: #c5a882;
+      --accent-hover: #dbbe97;
+      --accent-bg: rgba(197, 168, 130, 0.15);
+      --text: #f0f1f5;
+      --text-muted: #9aa0ac;
+      --active-btn: #2d3342;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    body, html { width: 100%; height: 100%; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); }
+
+    #viewport-container { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    /* Top Bar Header */
+    header {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      z-index: 100;
+    }
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+    }
+    .header-title span.tag {
+      background: var(--accent);
+      color: #121316;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+    .current-room {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mode-switcher {
+      display: flex;
+      background: rgba(0,0,0,0.35);
+      padding: 3px;
+      border-radius: 8px;
+      gap: 3px;
+    }
+    .mode-btn {
+      background: transparent;
+      border: 0;
+      color: var(--text-muted);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .mode-btn:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+    .mode-btn.active {
+      color: #121316;
+      background: var(--accent);
+      box-shadow: 0 2px 8px rgba(197, 168, 130, 0.4);
+    }
+
+    /* Left Sidebar */
+    aside {
+      position: absolute;
+      top: 82px;
+      left: 16px;
+      bottom: 16px;
+      width: 280px;
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .sidebar-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--panel-border);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .sidebar-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .sidebar-content::-webkit-scrollbar { width: 5px; }
+    .sidebar-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+
+    .nav-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .room-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .room-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 7px 10px;
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+    }
+    .room-btn span.badge {
+      font-size: 10px;
+      color: var(--text-muted);
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+    .room-btn:hover {
+      background: var(--accent-bg);
+      border-color: rgba(197, 168, 130, 0.4);
+      color: var(--accent);
+    }
+
+    /* Controls & Toggles */
+    .control-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text);
+    }
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.15);
+      outline: none;
+    }
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+    }
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+    .toggle-row input { cursor: pointer; accent-color: var(--accent); }
+
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4px;
+    }
+    .btn-small {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      font-size: 11px;
+      padding: 6px 0;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+    .btn-small:hover { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
+
+    .action-btn {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--panel-border);
+      color: var(--text);
+      padding: 9px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .action-btn:hover { background: var(--accent); color: #121316; }
+    .action-btn.active { background: #e04444; color: #fff; border-color: #ff5555; }
+
+    /* Bottom Info & HUD */
+    #fps-crosshair {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      border: 2px solid rgba(255,255,255,0.7);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 80;
+    }
+    #navigation-help {
+      position: absolute;
+      bottom: 20px;
+      left: 312px;
+      background: var(--panel);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--panel-border);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      z-index: 80;
+      display: flex;
+      gap: 16px;
+    }
+    #navigation-help b { color: var(--text); }
+
+    /* Minimap HUD */
+    #minimap-container {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 200px;
+      height: 170px;
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      z-index: 90;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    #minimap-header {
+      padding: 6px 10px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+    }
+    #minimap-canvas {
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+    }
+
+    #measure-info {
+      display: none;
+      position: absolute;
+      top: 82px;
+      left: 312px;
+      background: rgba(200, 40, 40, 0.9);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 100;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header>
+    <div class="header-title">
+      <span>HI VIEW</span>
+      <span class="tag">125,79 m²</span>
+      <span style="font-weight: 400; opacity: 0.6; font-size: 13px;">| Apartamento Vazio (Finais 1 e 6)</span>
+    </div>
+
+    <div id="current-room-badge" class="current-room">
+      📍 <b>Sala de Estar / Jantar</b> <span style="opacity:0.75">(29.4 m²)</span>
+    </div>
+
+    <div class="mode-switcher">
+      <button id="btn-fps" class="mode-btn" onclick="setMode('fps')">
+        🚶 1ª Pessoa
+      </button>
+      <button id="btn-orbit" class="mode-btn active" onclick="setMode('orbit')">
+        🏠 Maquete 3D
+      </button>
+      <button id="btn-plan" class="mode-btn" onclick="setMode('plan')">
+        📐 Planta 2D
+      </button>
+    </div>
+  </header>
+
+  <!-- Left Sidebar Navigation & Controls -->
+  <aside>
+    <div class="sidebar-header">Cômodos & Navegação</div>
+    <div class="sidebar-content">
+      
+      <!-- Room Teleports -->
+      <div>
+        <div class="nav-section-title">Ir para Cômodo (Teleporte)</div>
+        <div class="room-list">
+          <button class="room-btn" onclick="teleportTo('sala')">
+            <span>🛋️ Sala de Estar / Jantar</span>
+            <span class="badge">29,4 m²</span>
+          </button>
+          <button class="room-btn" onclick="teleportTo('terraco')">
+            <span>🍷 Terraço Gourmet</span>
+            <span class="badge">16,0 m²</span>
+          </button>
+          <button class="room-btn" onclick="teleportTo('cozinha')">
+            <span>🍳 Cozinha</span>
+            <span class="badge">9,0 m²</span>
+          </button>
+          <button class="room-btn" onclick="teleportTo('servico')">
+            <span>🧺 Área de Serviço</span>
+            <span class="badge">5,4 m²</span>
+          </button>
+          <button class="room-btn" onclick="teleportTo('suite_master')">
+            <span>👑 Suíte Master</span>
+            <span class="badge">13,7 m²</span>
+          </button>
+          <button class="room-btn" onclick="teleportTo('banho_master')">
+            <span>🚿 Banho Master (Cuba Dupla)</span>
+            <span class="badge">3,8 m²</span>
+          </button>
+          <button class="room-btn" onclick="teleportTo('suite2')">
+            <span>🛏️ Suíte 2</span>
+            <span class="badge">8,1 m²</span>
+          </button>
+          <button class="room-btn" onclick="teleportTo('banho2')">
+            <span>🚿 Banho 2</span>
+            <span class="badge">4,1 m²</span>
+          </button>
+          <button class="room-btn" onclick="teleportTo('suite1')">
+            <span>🛏️ Suíte 1</span>
+            <span class="badge">8,5 m²</span>
+          </button>
+          <button class="room-btn" onclick="teleportTo('banho1')">
+            <span>🚿 Banho 1</span>
+            <span class="badge">4,5 m²</span>
+          </button>
+          <button class="room-btn" onclick="teleportTo('hall')">
+            <span>🚪 Hall de Entrada</span>
+            <span class="badge">4,4 m²</span>
+          </button>
+          <button class="room-btn" onclick="teleportTo('lavabo')">
+            <span>🚻 Lavabo Social</span>
+            <span class="badge">2,7 m²</span>
+          </button>
+          <button class="room-btn" onclick="teleportTo('terraco_tecnico')">
+            <span>❄️ Terraço Técnico (AC)</span>
+            <span class="badge">4,2 m²</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Visibility & Height Settings -->
+      <div>
+        <div class="nav-section-title">Visualização & Corte</div>
+        
+        <div id="cut-height-control" class="control-row" style="margin-bottom: 12px;">
+          <div class="control-label">
+            <span>Altura das Paredes:</span>
+            <b id="wall-height-val" style="color:var(--accent);">2.7m</b>
+          </div>
+          <input id="wall-height-slider" class="slider" type="range" min="0.8" max="2.7" step="0.1" value="2.7" oninput="setWallsHeight(this.value)">
+        </div>
+
+        <label class="toggle-row">
+          <span>Forro de Teto (Laje)</span>
+          <input id="toggle-ceiling" type="checkbox" onchange="toggleCeiling(this.checked)">
+        </label>
+
+        <label class="toggle-row">
+          <span>Planta Original no Chão (1:1)</span>
+          <input id="toggle-overlay" type="checkbox" onchange="toggleOverlay(this.checked)">
+        </label>
+
+        <label class="toggle-row">
+          <span>Rótulos 3D dos Cômodos</span>
+          <input id="toggle-labels" type="checkbox" checked onchange="toggleLabels(this.checked)">
+        </label>
+      </div>
+
+      <!-- Lighting Presets -->
+      <div>
+        <div class="nav-section-title">Iluminação</div>
+        <div class="btn-group">
+          <button class="btn-small" onclick="setupLighting('day')">☀️ Dia</button>
+          <button class="btn-small" onclick="setupLighting('sunset')">🌅 Ocaso</button>
+          <button class="btn-small" onclick="setupLighting('night')">🌙 Noite</button>
+        </div>
+      </div>
+
+      <!-- Measuring Tool -->
+      <div>
+        <div class="nav-section-title">Ferramentas</div>
+        <button id="btn-measure" class="action-btn" onclick="toggleMeasure()">
+          📏 Trena / Medir Vão
+        </button>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- 3D Canvas Viewport -->
+  <div id="viewport-container"></div>
+
+  <!-- FPS Crosshair -->
+  <div id="fps-crosshair"></div>
+
+  <!-- Measurement Float Display -->
+  <div id="measure-info">📏 Clique em dois pontos para medir</div>
+
+  <!-- Navigation Help HUD -->
+  <div id="navigation-help">
+    <span><b>1ª Pessoa:</b> W, A, S, D para andar | Clique/Arraste mouse para olhar | Shift para correr</span>
+    <span><b>Maquete:</b> Botão esquerdo para girar órbita | Roda do mouse para zoom</span>
+  </div>
+
+  <!-- 2D Minimap -->
+  <div id="minimap-container">
+    <div id="minimap-header">
+      <span>MINIMAPA 2D</span>
+      <span style="opacity:0.6">CLIQUE P/ IR</span>
+    </div>
+    <canvas id="minimap-canvas" width="200" height="145"></canvas>
+  </div>
+
+  <!-- Local Libraries & Geometry Scripts -->
+  <script src="lib/three.min.js"></script>
+  <script src="lib/OrbitControls.js"></script>
+  <script src="plan_image_b64.js"></script>
+  <script src="apartment_geometry.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

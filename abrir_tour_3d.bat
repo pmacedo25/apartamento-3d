@@ -1,0 +1,3 @@
+@echo off
+echo Abrindo o Tour 3D do Apartamento HI VIEW (125,79 m2)...
+start "" "%~dp0index.html"
