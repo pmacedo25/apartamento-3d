@@ -5,6 +5,8 @@
 // Daylight Clear Lighting (No Shadows, Bright & Airy)
 // Full Meticulous Architectural Model: Walls, Pillars, Shafts, Built-in Fixtures, Interactive Doors
 
+const APARTMENT_DATA = window.APARTMENT_GEOMETRY || {};
+
 let scene, camera, renderer, orbitControls;
 let currentMode = 'orbit'; // 'orbit', 'fps', 'plan'
 let apartmentGroup, wallsGroup, floorsGroup, labelsGroup, ceilingGroup, doorsGroup;
