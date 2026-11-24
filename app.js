@@ -3,11 +3,12 @@
 // 100% Compatible with all mobile devices (Firefox Android, Chrome, Safari iOS)
 // Anthropometric Calibration: 1.70m Person (Eye Level: 1.60m)
 // Daylight Clear Lighting (No Shadows, Bright & Airy)
-// Interactive Doors with Smooth Swing Animation & Click/Proximity Controls
+// Full Meticulous Architectural Model: Walls, Pillars, Shafts, Built-in Fixtures, Interactive Doors
 
 let scene, camera, renderer, orbitControls;
 let currentMode = 'orbit'; // 'orbit', 'fps', 'plan'
 let apartmentGroup, wallsGroup, floorsGroup, labelsGroup, ceilingGroup, doorsGroup;
+let pillarsGroup, shaftsGroup, fixturesGroup;
 let floorPlanMesh = null;
 let measurePoints = [];
 let measureLine = null;
@@ -18,10 +19,10 @@ const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
 
 // Anthropometric First Person State (Person: 1.70m -> Eye Level: 1.60m)
 const player = {
-    pos: null, // Initialized in init()
+    pos: null,
     rotY: -Math.PI / 2, // Looking toward terrace
     pitch: 0,
-    speed: 1.6, // Realistic human walking speed: ~5.8 km/h (was sprinting at 3.5m/s!)
+    speed: 1.6, // Realistic human walking speed: ~5.8 km/h
     sprintMultiplier: 1.65,
     radius: 0.28,
     height: 1.60 // Standard eye line for a 1.70m tall person
@@ -112,7 +113,7 @@ function createSafeRenderer(container) {
     }
 
     if (!glRenderer) {
-        throw new Error('Não foi possível iniciar o WebGL no seu navegador. No Firefox Mobile, certifique-se de que a aceleração por hardware está habilitada.');
+        throw new Error('Não foi possível iniciar o WebGL no seu navegador. No Firefox Mobile, certifique-se de que a aceleração gráfica está habilitada.');
     }
 
     glRenderer.setSize(window.innerWidth, window.innerHeight);
@@ -149,13 +150,12 @@ function init() {
 
         const container = document.getElementById('viewport-container');
         if (!container) throw new Error('Elemento #viewport-container não encontrado');
-        container.innerHTML = ''; // Clear any previous canvas
+        container.innerHTML = '';
 
         // Scene
         scene = new THREE.Scene();
-        // Clear, bright daylight architectural atmosphere
         scene.background = new THREE.Color(0xf0f3f6);
-        scene.fog = null; // No dark fog obscuring the rooms!
+        scene.fog = null;
 
         // Camera
         camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.08, 150);
@@ -181,12 +181,18 @@ function init() {
         apartmentGroup = new THREE.Group();
         wallsGroup = new THREE.Group();
         floorsGroup = new THREE.Group();
+        pillarsGroup = new THREE.Group();
+        shaftsGroup = new THREE.Group();
+        fixturesGroup = new THREE.Group();
         labelsGroup = new THREE.Group();
         ceilingGroup = new THREE.Group();
         doorsGroup = new THREE.Group();
 
         apartmentGroup.add(floorsGroup);
         apartmentGroup.add(wallsGroup);
+        apartmentGroup.add(pillarsGroup);
+        apartmentGroup.add(shaftsGroup);
+        apartmentGroup.add(fixturesGroup);
         apartmentGroup.add(doorsGroup);
         apartmentGroup.add(ceilingGroup);
         apartmentGroup.add(labelsGroup);
@@ -204,6 +210,9 @@ function init() {
         // Build Architectural Geometry
         buildFloors();
         buildWalls();
+        buildPillars();
+        buildShafts();
+        buildFixtures();
         buildFloorPlanOverlay();
         buildRoomLabels();
 
@@ -216,7 +225,6 @@ function init() {
         // Minimap
         initMinimap();
 
-        // Hide any loading error if previously shown
         const errorEl = document.getElementById('webgl-error');
         if (errorEl) errorEl.style.display = 'none';
 
@@ -261,7 +269,7 @@ function showDoorToast(msg) {
 // Procedural Canvas Textures for PBR (High albedo, bright and clean)
 function initTextures() {
     try {
-        // 1. Porcelain Tile (Living / Kitchen / Hall) - Bright warm off-white
+        // 1. Porcelain Tile (Living / Kitchen / Hall)
         const cvPorcelain = document.createElement('canvas');
         cvPorcelain.width = 256; cvPorcelain.height = 256;
         const ctxP = cvPorcelain.getContext('2d');
@@ -305,7 +313,7 @@ function initTextures() {
         texTerrace.wrapT = THREE.RepeatWrapping;
         textures.terrace = texTerrace;
 
-        // 4. Bath Tile / Ceramic (White marble-look)
+        // 4. Bath Tile / Ceramic
         const cvBath = document.createElement('canvas');
         cvBath.width = 256; cvBath.height = 256;
         const ctxB = cvBath.getContext('2d');
@@ -403,7 +411,7 @@ function buildFloors() {
         const cz = z1 + d / 2;
 
         let floorBaseTex = textures.porcelain;
-        let tileW = 0.90; // 90cm porcelain slabs for Living / Kitchen / Hall
+        let tileW = 0.90; // 90cm porcelain slabs
         let tileD = 0.90;
         let roughness = 0.35;
         let metalness = 0.05;
@@ -411,16 +419,16 @@ function buildFloors() {
         if (room.floor === 'wood') {
             floorBaseTex = textures.wood;
             tileW = 1.20; // 1.20m wood planks
-            tileD = 0.20; // 20cm plank width
+            tileD = 0.20;
             roughness = 0.55;
         } else if (room.floor === 'deck_or_tile') {
             floorBaseTex = textures.terrace;
-            tileW = 0.60; // 60x60cm outdoor tiles
+            tileW = 0.60;
             tileD = 0.60;
             roughness = 0.6;
         } else if (room.floor === 'tile_light' || room.floor === 'tile_dark' || room.floor === 'concrete') {
             floorBaseTex = textures.bath;
-            tileW = 0.60; // 60x60cm ceramic
+            tileW = 0.60;
             tileD = 0.60;
             roughness = 0.35;
         }
@@ -429,7 +437,6 @@ function buildFloors() {
         if (floorBaseTex) {
             roomTex = floorBaseTex.clone();
             roomTex.needsUpdate = true;
-            // Real Metric Repeat: human brain sees exact tile counts to judge room size!
             roomTex.repeat.set(w / tileW, d / tileD);
         }
 
@@ -460,7 +467,7 @@ function buildFloors() {
         ceilingGroup.add(ceilMesh);
     });
 
-    // Base ground slab underneath apartment (Bright clean platform)
+    // Base ground slab underneath apartment
     const slabGeo = new THREE.BoxGeometry(15, 0.2, 13);
     const slabMat = new THREE.MeshStandardMaterial({ color: 0xe2e6eb, roughness: 0.9 });
     const slabMesh = new THREE.Mesh(slabGeo, slabMat);
@@ -468,38 +475,24 @@ function buildFloors() {
     floorsGroup.add(slabMesh);
 }
 
-// Robust Materials (High albedo, clear and clean)
-const wallMaterial = new THREE.MeshStandardMaterial({
-    color: 0xfcfbfa,
-    roughness: 0.75,
-    metalness: 0.0
-});
-const baseboardMaterial = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
-    roughness: 0.35
-});
-const glassMaterial = new THREE.MeshStandardMaterial({
-    color: 0x9ec7db,
-    transparent: true,
-    opacity: 0.35,
-    roughness: 0.1,
-    metalness: 0.1,
-    side: THREE.DoubleSide,
-    depthWrite: false
-});
-const frameMaterial = new THREE.MeshStandardMaterial({
-    color: 0x222428,
-    roughness: 0.4,
-    metalness: 0.5
-});
-const doorWoodMaterial = new THREE.MeshStandardMaterial({
-    color: 0xd6c2a8,
-    roughness: 0.45,
-    metalness: 0.05
-});
+// Materials
+const wallMaterial = new THREE.MeshStandardMaterial({ color: 0xfcfbfa, roughness: 0.75, metalness: 0.0 });
+const baseboardMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35 });
+const pillarMaterial = new THREE.MeshStandardMaterial({ color: 0xe6e4df, roughness: 0.80, metalness: 0.05 });
+const shaftMaterial = new THREE.MeshStandardMaterial({ color: 0xf8f6f0, roughness: 0.75, metalness: 0.0 });
+const beamMaterial = new THREE.MeshStandardMaterial({ color: 0xf4f2ee, roughness: 0.80, metalness: 0.0 });
+const graniteBlackMat = new THREE.MeshStandardMaterial({ color: 0x242528, roughness: 0.25, metalness: 0.1 });
+const marbleLightMat = new THREE.MeshStandardMaterial({ color: 0xf2eee7, roughness: 0.20, metalness: 0.05 });
+const ceramicWhiteMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.15, metalness: 0.05 });
+const chromeMat = new THREE.MeshStandardMaterial({ color: 0xdddddd, roughness: 0.15, metalness: 0.95 });
+const steelSinkMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, roughness: 0.25, metalness: 0.85 });
+const glassMaterial = new THREE.MeshStandardMaterial({ color: 0x9ec7db, transparent: true, opacity: 0.35, roughness: 0.1, metalness: 0.1, side: THREE.DoubleSide, depthWrite: false });
+const showerGlassMat = new THREE.MeshStandardMaterial({ color: 0xa8d4e6, transparent: true, opacity: 0.45, roughness: 0.1, metalness: 0.1, side: THREE.DoubleSide, depthWrite: false });
+const frameMaterial = new THREE.MeshStandardMaterial({ color: 0x222428, roughness: 0.4, metalness: 0.5 });
+const doorWoodMaterial = new THREE.MeshStandardMaterial({ color: 0xd6c2a8, roughness: 0.45, metalness: 0.05 });
 
 function buildWalls() {
-    interactiveDoors.length = 0; // Reset doors list
+    interactiveDoors.length = 0;
 
     APARTMENT_DATA.walls.forEach(w => {
         const dx = w.x2 - w.x1;
@@ -522,11 +515,20 @@ function buildWalls() {
             return;
         }
 
+        if (w.type === 'beam') {
+            // Overhead dropped structural beam
+            const beamGeo = new THREE.BoxGeometry(len, wallHeight, thick);
+            const beamMesh = new THREE.Mesh(beamGeo, beamMaterial);
+            beamMesh.position.set(len / 2, 2.70 - wallHeight / 2, 0);
+            wallObj.add(beamMesh);
+            wallsGroup.add(wallObj);
+            return;
+        }
+
         if (w.type === 'countertop') {
-            const topGeo = new THREE.BoxGeometry(len, 0.92, thick);
-            const topMat = new THREE.MeshStandardMaterial({ color: 0x2e3035, roughness: 0.25, metalness: 0.1 });
-            const topMesh = new THREE.Mesh(topGeo, topMat);
-            topMesh.position.set(len / 2, 0.46, 0);
+            const topGeo = new THREE.BoxGeometry(len, 0.95, thick);
+            const topMesh = new THREE.Mesh(topGeo, graniteBlackMat);
+            topMesh.position.set(len / 2, 0.475, 0);
             wallObj.add(topMesh);
             wallsGroup.add(wallObj);
             return;
@@ -633,6 +635,217 @@ function buildWalls() {
     });
 }
 
+// Build Structural Concrete Pillars (Pilares Estruturais)
+function buildPillars() {
+    if (!APARTMENT_DATA.pillars) return;
+    APARTMENT_DATA.pillars.forEach(p => {
+        const pObj = new THREE.Group();
+        pObj.position.set(p.x, 0, p.z);
+        pObj.userData = { pillarData: p, baseHeight: p.h || 2.70 };
+
+        const geo = new THREE.BoxGeometry(p.w, p.h || 2.70, p.d);
+        const mesh = new THREE.Mesh(geo, pillarMaterial);
+        mesh.position.set(p.w / 2, (p.h || 2.70) / 2, p.d / 2);
+        pObj.add(mesh);
+
+        // Skirting / Baseboard around pillar
+        const bbGeo = new THREE.BoxGeometry(p.w + 0.02, 0.14, p.d + 0.02);
+        const bbMesh = new THREE.Mesh(bbGeo, baseboardMaterial);
+        bbMesh.position.set(p.w / 2, 0.07, p.d / 2);
+        pObj.add(bbMesh);
+
+        pillarsGroup.add(pObj);
+    });
+}
+
+// Build Technical Shafts (Shafts Hidráulicos / Ventilação)
+function buildShafts() {
+    if (!APARTMENT_DATA.shafts) return;
+    APARTMENT_DATA.shafts.forEach(s => {
+        const sObj = new THREE.Group();
+        sObj.position.set(s.x, 0, s.z);
+        sObj.userData = { shaftData: s, baseHeight: s.h || 2.70 };
+
+        const geo = new THREE.BoxGeometry(s.w, s.h || 2.70, s.d);
+        const mesh = new THREE.Mesh(geo, shaftMaterial);
+        mesh.position.set(s.w / 2, (s.h || 2.70) / 2, s.d / 2);
+        sObj.add(mesh);
+
+        // Baseboard
+        const bbGeo = new THREE.BoxGeometry(s.w + 0.02, 0.14, s.d + 0.02);
+        const bbMesh = new THREE.Mesh(bbGeo, baseboardMaterial);
+        bbMesh.position.set(s.w / 2, 0.07, s.d / 2);
+        sObj.add(bbMesh);
+
+        shaftsGroup.add(sObj);
+    });
+}
+
+// Build Built-in Fixed Architectural Fixtures (Bancadas, pias, churrasqueira, louças, boxes)
+function buildFixtures() {
+    if (!APARTMENT_DATA.fixtures) return;
+
+    APARTMENT_DATA.fixtures.forEach(f => {
+        const grp = new THREE.Group();
+        grp.position.set(f.x, 0, f.z);
+
+        if (f.type === 'counter_sink') {
+            // Kitchen Countertop
+            const topGeo = new THREE.BoxGeometry(f.w, f.h, f.d);
+            const topMesh = new THREE.Mesh(topGeo, graniteBlackMat);
+            topMesh.position.set(f.w / 2, f.h / 2, f.d / 2);
+            grp.add(topMesh);
+
+            // Stainless Steel Sink
+            const sinkX = f.sink_x ? f.sink_x - f.x : f.w / 2;
+            const sinkGeo = new THREE.BoxGeometry(0.60, 0.02, 0.40);
+            const sinkMesh = new THREE.Mesh(sinkGeo, steelSinkMat);
+            sinkMesh.position.set(sinkX, f.h + 0.005, f.d / 2);
+            grp.add(sinkMesh);
+
+            // Chrome Faucet
+            buildFaucet(grp, sinkX, f.h + 0.01, f.d / 2 - 0.14);
+
+        } else if (f.type === 'laundry_tub') {
+            // Service laundry sink
+            const tubGeo = new THREE.BoxGeometry(f.w, f.h, f.d);
+            const tubMesh = new THREE.Mesh(tubGeo, ceramicWhiteMat);
+            tubMesh.position.set(f.w / 2, f.h / 2, f.d / 2);
+            grp.add(tubMesh);
+
+            // Inset bowl
+            const bowlGeo = new THREE.BoxGeometry(f.w - 0.14, 0.28, f.d - 0.14);
+            const bowlMat = new THREE.MeshStandardMaterial({ color: 0xefefef, roughness: 0.15 });
+            const bowlMesh = new THREE.Mesh(bowlGeo, bowlMat);
+            bowlMesh.position.set(f.w / 2, f.h - 0.14, f.d / 2);
+            grp.add(bowlMesh);
+
+            buildFaucet(grp, f.w / 2, f.h + 0.01, 0.08);
+
+        } else if (f.type === 'gourmet_counter') {
+            // Barbecue Countertop
+            const topGeo = new THREE.BoxGeometry(f.w, f.h, f.d);
+            const topMesh = new THREE.Mesh(topGeo, graniteBlackMat);
+            topMesh.position.set(f.w / 2, f.h / 2, f.d / 2);
+            grp.add(topMesh);
+
+            // Round sink
+            const sinkGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.02, 24);
+            const sinkMesh = new THREE.Mesh(sinkGeo, steelSinkMat);
+            sinkMesh.position.set(0.35, f.h + 0.005, f.d / 2);
+            grp.add(sinkMesh);
+            buildFaucet(grp, 0.35, f.h + 0.01, f.d / 2 - 0.14);
+
+            // Barbecue grill niche
+            const bbqGeo = new THREE.BoxGeometry(f.bbq_w || 0.45, 0.04, f.d - 0.12);
+            const bbqMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.8 });
+            const bbqMesh = new THREE.Mesh(bbqGeo, bbqMat);
+            bbqMesh.position.set(f.w - (f.bbq_w || 0.45) / 2 - 0.08, f.h + 0.01, f.d / 2);
+            grp.add(bbqMesh);
+
+        } else if (f.type === 'double_vanity') {
+            // Master Double Vanity
+            const topGeo = new THREE.BoxGeometry(f.w, f.h, f.d);
+            const topMesh = new THREE.Mesh(topGeo, marbleLightMat);
+            topMesh.position.set(f.w / 2, f.h / 2, f.d / 2);
+            grp.add(topMesh);
+
+            // Sink 1 & 2
+            const z1 = f.sink_z1 - f.z;
+            const z2 = f.sink_z2 - f.z;
+
+            [z1, z2].forEach(zPos => {
+                const sGeo = new THREE.BoxGeometry(f.w - 0.16, 0.02, 0.38);
+                const sMesh = new THREE.Mesh(sGeo, ceramicWhiteMat);
+                sMesh.position.set(f.w / 2, f.h + 0.005, zPos);
+                grp.add(sMesh);
+
+                buildFaucet(grp, 0.08, f.h + 0.01, zPos, 'side');
+            });
+
+        } else if (f.type === 'vanity') {
+            // Single Bathroom Vanity
+            const topGeo = new THREE.BoxGeometry(f.w, f.h, f.d);
+            const topMesh = new THREE.Mesh(topGeo, marbleLightMat);
+            topMesh.position.set(f.w / 2, f.h / 2, f.d / 2);
+            grp.add(topMesh);
+
+            const sGeo = new THREE.BoxGeometry(Math.min(0.42, f.w - 0.14), 0.02, Math.min(0.38, f.d - 0.14));
+            const sMesh = new THREE.Mesh(sGeo, ceramicWhiteMat);
+            sMesh.position.set(f.w / 2, f.h + 0.005, f.d / 2);
+            grp.add(sMesh);
+
+            buildFaucet(grp, f.w / 2, f.h + 0.01, 0.08);
+
+        } else if (f.type === 'toilet') {
+            // Toilet with Flush Tank
+            const bowlGeo = new THREE.BoxGeometry(f.w, 0.42, f.d - 0.20);
+            const bowlMesh = new THREE.Mesh(bowlGeo, ceramicWhiteMat);
+            bowlMesh.position.set(f.w / 2, 0.21, f.d / 2 + 0.05);
+            grp.add(bowlMesh);
+
+            const tankGeo = new THREE.BoxGeometry(f.w, 0.38, 0.18);
+            const tankMesh = new THREE.Mesh(tankGeo, ceramicWhiteMat);
+            tankMesh.position.set(f.w / 2, 0.58, 0.09);
+            grp.add(tankMesh);
+
+            const btnGeo = new THREE.CylinderGeometry(0.025, 0.025, 0.015, 16);
+            const btnMesh = new THREE.Mesh(btnGeo, chromeMat);
+            btnMesh.position.set(f.w / 2, 0.775, 0.09);
+            grp.add(btnMesh);
+
+            if (f.rotY) grp.rotation.y = f.rotY;
+
+        } else if (f.type === 'shower_box') {
+            // Glass Shower Screen
+            const isHorizontal = f.w > f.d;
+            const glassLen = isHorizontal ? f.w : f.d;
+            const glassGeo = new THREE.BoxGeometry(isHorizontal ? glassLen : 0.015, f.h, isHorizontal ? 0.015 : glassLen);
+            const glassMesh = new THREE.Mesh(glassGeo, showerGlassMat);
+            glassMesh.position.set(f.w / 2, f.h / 2, f.d / 2);
+            grp.add(glassMesh);
+
+            // Shower Head
+            if (f.shower_pos) {
+                const sGrp = new THREE.Group();
+                sGrp.position.set(f.shower_pos[0] - f.x, f.shower_pos[1], f.shower_pos[2] - f.z);
+
+                const armGeo = new THREE.CylinderGeometry(0.015, 0.015, 0.35, 8);
+                const armMesh = new THREE.Mesh(armGeo, chromeMat);
+                armMesh.rotation.x = Math.PI / 2;
+                sGrp.add(armMesh);
+
+                const headGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.02, 24);
+                const headMesh = new THREE.Mesh(headGeo, chromeMat);
+                headMesh.position.set(0, -0.06, 0.18);
+                sGrp.add(headMesh);
+
+                grp.add(sGrp);
+            }
+        }
+
+        fixturesGroup.add(grp);
+    });
+}
+
+function buildFaucet(parentGroup, x, y, z, orient = 'front') {
+    const fGrp = new THREE.Group();
+    fGrp.position.set(x, y, z);
+
+    const baseGeo = new THREE.CylinderGeometry(0.025, 0.025, 0.04, 12);
+    const baseMesh = new THREE.Mesh(baseGeo, chromeMat);
+    baseMesh.position.y = 0.02;
+    fGrp.add(baseMesh);
+
+    const spoutGeo = new THREE.TorusGeometry(0.08, 0.015, 8, 16, Math.PI / 1.2);
+    const spoutMesh = new THREE.Mesh(spoutGeo, chromeMat);
+    spoutMesh.position.set(0, 0.10, orient === 'side' ? 0.04 : 0.04);
+    if (orient === 'side') spoutMesh.rotation.y = Math.PI / 2;
+    fGrp.add(spoutMesh);
+
+    parentGroup.add(fGrp);
+}
+
 function buildBalconyRailing(group, len, h, thick) {
     const glassGeo = new THREE.BoxGeometry(len, h - 0.10, 0.02);
     const glassMesh = new THREE.Mesh(glassGeo, glassMaterial);
@@ -716,8 +929,7 @@ function buildDoorFrameAndLeaf(group, start, w, h, thick, op) {
     pivot.add(leafMesh);
 
     const handleGeo = new THREE.BoxGeometry(0.12, 0.03, 0.06);
-    const handleMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.9, roughness: 0.2 });
-    const handleMesh = new THREE.Mesh(handleGeo, handleMat);
+    const handleMesh = new THREE.Mesh(handleGeo, chromeMat);
     handleMesh.position.set(leafW - 0.08, 0.98, 0.03);
     pivot.add(handleMesh);
 
@@ -738,7 +950,7 @@ function buildDoorFrameAndLeaf(group, start, w, h, thick, op) {
         leafMesh: leafMesh,
         handleMesh: handleMesh,
         hitMesh: hitMesh,
-        isOpen: false, // Starts closed
+        isOpen: false,
         currentAngle: 0.0,
         targetAngle: 0.0,
         openAngle: Math.PI * 0.48, // ~86 degrees swing
@@ -900,7 +1112,7 @@ function updateNearestDoorHUD() {
     }
 
     let closest = null;
-    let minDist = 2.2; // 2.2 meters proximity range
+    let minDist = 2.2;
     const camPos = camera.position;
 
     interactiveDoors.forEach(d => {
@@ -954,15 +1166,13 @@ function updateCameraFov() {
     if (currentMode === 'fps') {
         const desiredHFovRad = 85 * (Math.PI / 180);
         if (aspect < 1.0) {
-            // Portrait Mobile: compute vertical FOV to maintain 85 deg horizontal vision!
             const vFovRad = 2 * Math.atan(Math.tan(desiredHFovRad / 2) / aspect);
             camera.fov = Math.min(115, THREE.MathUtils.radToDeg(vFovRad));
         } else {
-            // Landscape Desktop / Tablet
-            camera.fov = 60; // 60 vertical -> 90 horizontal on 16:9
+            camera.fov = 60;
         }
     } else if (currentMode === 'orbit') {
-        camera.fov = 48; // Architectural perspective without edge distortion
+        camera.fov = 48;
     } else if (currentMode === 'plan') {
         camera.fov = 40;
     }
@@ -994,7 +1204,6 @@ function setMode(mode) {
         if (joystickEl) joystickEl.style.display = 'none';
         if (navHelp && !isMobile) navHelp.style.display = 'flex';
         
-        // Restore room labels in Orbit mode
         const toggleLabels = document.getElementById('toggle-labels');
         labelsGroup.visible = toggleLabels ? toggleLabels.checked : true;
 
@@ -1013,7 +1222,6 @@ function setMode(mode) {
         if (joystickEl) joystickEl.style.display = 'none';
         if (navHelp && !isMobile) navHelp.style.display = 'flex';
 
-        // Restore room labels in Plan mode
         const toggleLabels = document.getElementById('toggle-labels');
         labelsGroup.visible = toggleLabels ? toggleLabels.checked : true;
 
@@ -1028,7 +1236,7 @@ function setMode(mode) {
         if (joystickEl) joystickEl.style.display = isMobile ? 'block' : 'none';
         if (navHelp && !isMobile) navHelp.style.display = 'flex';
 
-        // USER REQUEST: Hide room labels & area badges in First Person for complete immersion!
+        // Hide room labels in First Person
         labelsGroup.visible = false;
 
         setWallsHeight(2.70);
@@ -1077,6 +1285,16 @@ function setWallsHeight(heightVal) {
         wObj.scale.y = targetScaleY;
     });
 
+    pillarsGroup.children.forEach(pObj => {
+        const baseH = pObj.userData.baseHeight || 2.70;
+        pObj.scale.y = Math.min(1.0, h / baseH);
+    });
+
+    shaftsGroup.children.forEach(sObj => {
+        const baseH = sObj.userData.baseHeight || 2.70;
+        sObj.scale.y = Math.min(1.0, h / baseH);
+    });
+
     const ceilCheckbox = document.getElementById('toggle-ceiling');
     ceilingGroup.visible = (h >= 2.65 && ceilCheckbox && ceilCheckbox.checked);
 }
@@ -1106,7 +1324,7 @@ function setupEvents() {
         if (e.key === '2') setMode('orbit');
         if (e.key === '3') setMode('plan');
         if (e.key === 'm') toggleMeasure();
-        if (k === 'e') triggerNearestDoor(); // Press E to open/close door!
+        if (k === 'e') triggerNearestDoor();
     });
 
     window.addEventListener('keyup', (e) => {
@@ -1126,7 +1344,6 @@ function setupEvents() {
             return;
         }
 
-        // Check if user clicked on an interactive door
         const doorClicked = checkDoorClick(e.clientX, e.clientY);
         if (doorClicked) return;
 
@@ -1175,7 +1392,7 @@ function setupEvents() {
     setupTouchControls();
 }
 
-// Touch Controls (Look on right side, tap to open door, joystick on left)
+// Touch Controls
 function setupTouchControls() {
     const canvas = renderer.domElement;
     let touchLookStart = { x: 0, y: 0 };
@@ -1220,7 +1437,6 @@ function setupTouchControls() {
 
     canvas.addEventListener('touchend', (e) => {
         isLookingTouch = false;
-        // Check if quick tap (under 250ms) to trigger a door click
         if (Date.now() - touchStartTime < 250 && e.changedTouches.length > 0) {
             const t = e.changedTouches[0];
             checkDoorClick(t.clientX, t.clientY);
@@ -1308,7 +1524,6 @@ function updateFPSMovement(dt) {
     if (keys.a) moveX -= 1;
     if (keys.d) moveX += 1;
 
-    // Joystick contribution
     if (touchJoystick.active) {
         moveX += touchJoystick.moveX;
         moveZ += touchJoystick.moveZ;
@@ -1343,7 +1558,6 @@ function updateFPSMovement(dt) {
         updateCurrentRoomDisplay();
     }
 
-    // Update Proximity for door opening HUD
     updateNearestDoorHUD();
 }
 
@@ -1459,7 +1673,7 @@ function handleMeasureClick(e) {
     const raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(mouse, camera);
 
-    const intersects = raycaster.intersectObjects([...floorsGroup.children, ...wallsGroup.children], true);
+    const intersects = raycaster.intersectObjects([...floorsGroup.children, ...wallsGroup.children, ...pillarsGroup.children, ...fixturesGroup.children], true);
     if (intersects.length > 0) {
         const pt = intersects[0].point;
         measurePoints.push(pt);
@@ -1517,7 +1731,6 @@ function animate() {
     if (!clock) return;
     const dt = Math.min(clock.getDelta(), 0.1);
 
-    // Smooth door animation lerp
     interactiveDoors.forEach(d => {
         if (Math.abs(d.currentAngle - d.targetAngle) > 0.001) {
             d.currentAngle = THREE.MathUtils.lerp(d.currentAngle, d.targetAngle, dt * 7.5);
