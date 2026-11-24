@@ -1,0 +1,454 @@
+{
+  "project": "HI VIEW - Finais 1 e 6 (125.79 m²)",
+  "audit_target": "Suíte 2, Banho 2 e Circulação Íntima / Roupeiro",
+  "pages_audited": [
+    0,
+    6,
+    11
+  ],
+  "rooms": {
+    "banho2": {
+      "id": "banho2",
+      "name": "Banho 2 (Suíte 2)",
+      "floor_type": "porcelanato_cinza / tile_light",
+      "internal_box": [
+        5.941,
+        8.413,
+        7.282,
+        10.875
+      ],
+      "gross_wall_box": [
+        5.801,
+        8.255,
+        7.44,
+        11.094
+      ],
+      "internal_dimensions_m": {
+        "width_x": 1.341,
+        "length_z": 2.462,
+        "ceiling_height": 2.7,
+        "recessed_plaster_ceiling_height": 2.4
+      },
+      "net_area_m2": 3.3,
+      "walls": [
+        {
+          "id": "wall_banho2_west",
+          "description": "Parede divisória entre Banho Master e Banho 2 (fechada, contínua e sem aberturas)",
+          "type": "interior_drywall_double",
+          "x1": 5.801,
+          "z1": 8.404,
+          "x2": 5.801,
+          "z2": 10.875,
+          "thickness": 0.14,
+          "height": 2.7,
+          "openings": []
+        },
+        {
+          "id": "wall_banho2_south",
+          "description": "Parede Sul externa de fachada do Banho 2 com janela alta",
+          "type": "exterior_masonry",
+          "x1": 5.801,
+          "z1": 10.875,
+          "x2": 7.44,
+          "z2": 10.875,
+          "thickness": 0.2,
+          "height": 2.7,
+          "openings": [
+            {
+              "type": "window_maxim_ar",
+              "label": "Janela Alta Banho 2",
+              "x1": 6.472,
+              "x2": 7.11,
+              "width": 0.638,
+              "sill": 1.6,
+              "height": 0.6
+            }
+          ]
+        },
+        {
+          "id": "wall_banho2_east",
+          "description": "Parede Leste do Banho 2 divisória com Suíte 2 e porta para Circulação",
+          "type": "interior_drywall",
+          "x1": 7.282,
+          "z1": 8.413,
+          "x2": 7.282,
+          "z2": 10.875,
+          "thickness": 0.158,
+          "height": 2.7,
+          "openings": [
+            {
+              "type": "door",
+              "label": "Porta Banho 2",
+              "z1": 8.413,
+              "z2": 9.153,
+              "width": 0.74,
+              "nominal_door_width": 0.7,
+              "height": 2.1,
+              "hinge_at": [
+                7.282,
+                8.455
+              ],
+              "swing_direction": "inward_against_north_wall"
+            }
+          ]
+        },
+        {
+          "id": "wall_banho2_north",
+          "description": "Parede Norte do Banho 2 divisória com circulação/closet master",
+          "type": "interior_drywall",
+          "x1": 5.941,
+          "z1": 8.413,
+          "x2": 7.282,
+          "z2": 8.413,
+          "thickness": 0.158,
+          "height": 2.7,
+          "openings": []
+        }
+      ],
+      "fixtures": {
+        "shaft": {
+          "id": "S6",
+          "name": "Shaft Hidráulico e de Ventilação Banho 2 (Prumada V e E)",
+          "box": [
+            5.941,
+            9.951,
+            6.306,
+            10.875
+          ],
+          "width": 0.365,
+          "length": 0.924,
+          "pipes": [
+            "Esgoto (E)",
+            "Ventilação (V)",
+            "Água Fria (PEX)",
+            "Água Quente (PEX)"
+          ]
+        },
+        "bancada": {
+          "name": "Bancada em pedra com cuba de embutir e torneira",
+          "box": [
+            5.951,
+            8.413,
+            6.5,
+            9.214
+          ],
+          "width": 0.549,
+          "length": 0.801,
+          "cuba_center": [
+            6.225,
+            8.814
+          ],
+          "has_carenagem_inferior": true
+        },
+        "toilet": {
+          "name": "Vaso sanitário com caixa acoplada",
+          "box": [
+            5.941,
+            9.42,
+            6.484,
+            9.779
+          ],
+          "width": 0.543,
+          "length": 0.359,
+          "center": [
+            6.212,
+            9.6
+          ]
+        },
+        "box_chuveiro": {
+          "name": "Box de vidro temperado e ducha",
+          "shower_area_box": [
+            6.306,
+            9.951,
+            7.282,
+            10.875
+          ],
+          "shower_width": 0.976,
+          "shower_depth": 0.924,
+          "glass_partition_z": 9.951,
+          "ducha_location": [
+            6.589,
+            10.4
+          ],
+          "ducha_arm_wall_anchor": [
+            6.306,
+            10.4
+          ]
+        }
+      }
+    },
+    "suite2": {
+      "id": "suite2",
+      "name": "Suíte 2 (Dormitório)",
+      "floor_type": "laminado_madeira / wood",
+      "internal_box": [
+        7.44,
+        7.654,
+        9.94,
+        10.866
+      ],
+      "gross_wall_box": [
+        7.282,
+        7.654,
+        10.153,
+        11.094
+      ],
+      "net_area_m2": 7.42,
+      "walls": [
+        {
+          "id": "wall_suite2_west",
+          "description": "Parede Oeste da Suíte 2 (divisória contínua com Banho 2 e shaft)",
+          "type": "interior_drywall",
+          "x1": 7.44,
+          "z1": 8.363,
+          "x2": 7.44,
+          "z2": 10.866,
+          "thickness": 0.158,
+          "height": 2.7,
+          "concrete_strip": {
+            "description": "Faixa de concreto armado indicada na Vista C (Page 6)",
+            "width": 0.4,
+            "z_start": 8.613,
+            "z_end": 9.013,
+            "ac_drain_pd_location": [
+              7.44,
+              8.813
+            ]
+          },
+          "openings": []
+        },
+        {
+          "id": "wall_suite2_south",
+          "description": "Parede Sul externa de fachada da Suíte 2 com janela ampla",
+          "type": "exterior_masonry",
+          "x1": 7.44,
+          "z1": 10.866,
+          "x2": 9.94,
+          "z2": 10.866,
+          "thickness": 0.2,
+          "height": 2.7,
+          "openings": [
+            {
+              "type": "sliding_window_2_folhas",
+              "label": "Janela Suíte 2",
+              "x1": 7.742,
+              "x2": 9.642,
+              "width": 1.9,
+              "nominal_width": 1.4,
+              "sill": 0.9,
+              "height": 1.3
+            }
+          ]
+        },
+        {
+          "id": "wall_suite2_east",
+          "description": "Parede Leste da Suíte 2 divisória com Suíte 1 e Terraço Técnico",
+          "type": "interior_exterior_mixed",
+          "x1": 9.94,
+          "z1": 7.654,
+          "x2": 9.94,
+          "z2": 10.866,
+          "thickness": 0.2,
+          "height": 2.7,
+          "openings": []
+        },
+        {
+          "id": "wall_suite2_north_stepped",
+          "description": "Parede Norte escalonada da Suíte 2 contendo a porta e o nicho do roupeiro",
+          "type": "interior_drywall_stepped",
+          "segments": [
+            {
+              "id": "segment_door",
+              "description": "Segmento horizontal da porta da Suíte 2",
+              "x1": 7.44,
+              "z1": 8.363,
+              "x2": 8.33,
+              "z2": 8.363,
+              "thickness": 0.14,
+              "openings": [
+                {
+                  "type": "door",
+                  "label": "Porta Suíte 2",
+                  "x1": 7.491,
+                  "x2": 8.292,
+                  "width": 0.801,
+                  "nominal_width": 0.8,
+                  "height": 2.1,
+                  "hinge_at": [
+                    7.491,
+                    8.363
+                  ],
+                  "swing_direction": "inward_into_suite2_against_west_wall"
+                }
+              ]
+            },
+            {
+              "id": "segment_niche_return",
+              "description": "Segmento vertical de retorno que forma o nicho do roupeiro",
+              "x1": 8.33,
+              "z1": 7.654,
+              "x2": 8.33,
+              "z2": 8.363,
+              "thickness": 0.111,
+              "depth": 0.709,
+              "openings": []
+            },
+            {
+              "id": "segment_niche_back",
+              "description": "Segmento horizontal de fundo do nicho do roupeiro",
+              "x1": 8.33,
+              "z1": 7.654,
+              "x2": 9.94,
+              "z2": 7.654,
+              "thickness": 0.12,
+              "width": 1.61,
+              "openings": []
+            }
+          ]
+        }
+      ]
+    },
+    "circulacao_intima": {
+      "id": "circulacao",
+      "name": "Circulação Íntima & Roupeiro",
+      "floor_type": "laminado_madeira / wood",
+      "internal_box": [
+        7.282,
+        6.603,
+        9.94,
+        8.363
+      ],
+      "net_area_m2": 4.5,
+      "walls": [
+        {
+          "id": "wall_circulacao_north",
+          "description": "Parede/Viga Norte divisória com Living (com vão de passagem livre)",
+          "x1": 7.44,
+          "z1": 6.603,
+          "x2": 9.94,
+          "z2": 6.603,
+          "thickness": 0.14,
+          "height": 2.7,
+          "passage_opening": {
+            "x1": 8.431,
+            "x2": 9.432,
+            "width": 1.001
+          }
+        },
+        {
+          "id": "wall_circulacao_west",
+          "description": "Parede Oeste divisória com corredor da Suíte Master e porta",
+          "x1": 7.282,
+          "z1": 6.752,
+          "x2": 7.282,
+          "z2": 8.363,
+          "thickness": 0.158,
+          "height": 2.7,
+          "openings": [
+            {
+              "type": "door",
+              "label": "Porta Suíte Master",
+              "z1": 7.362,
+              "z2": 8.162,
+              "width": 0.8,
+              "swing_direction": "inward_into_master_suite"
+            }
+          ]
+        },
+        {
+          "id": "wall_circulacao_east",
+          "description": "Parede Leste divisória com Suíte 1 e porta de acesso",
+          "x1": 9.94,
+          "z1": 6.603,
+          "x2": 9.94,
+          "z2": 7.654,
+          "thickness": 0.2,
+          "height": 2.7,
+          "openings": [
+            {
+              "type": "door",
+              "label": "Porta Suíte 1",
+              "z1": 6.851,
+              "z2": 7.651,
+              "width": 0.8,
+              "swing_direction": "inward_into_suite1"
+            }
+          ]
+        },
+        {
+          "id": "roupeiro_niche",
+          "description": "Nicho embutido do Roupeiro da circulação / suíte",
+          "dimensions": {
+            "width_x": 1.61,
+            "depth_z": 0.55,
+            "height_y": 2.7
+          },
+          "bounds": [
+            8.33,
+            7.654,
+            9.94,
+            8.204
+          ]
+        }
+      ],
+      "connected_doors": [
+        {
+          "room": "suite_master",
+          "door_type": "giro",
+          "width": 0.8,
+          "location": [
+            7.282,
+            7.762
+          ]
+        },
+        {
+          "room": "suite1",
+          "door_type": "giro",
+          "width": 0.8,
+          "location": [
+            9.94,
+            7.251
+          ]
+        },
+        {
+          "room": "suite2",
+          "door_type": "giro",
+          "width": 0.8,
+          "location": [
+            7.891,
+            8.363
+          ]
+        },
+        {
+          "room": "banho2",
+          "door_type": "giro",
+          "width": 0.7,
+          "location": [
+            7.282,
+            8.783
+          ]
+        }
+      ]
+    }
+  },
+  "pillars": [
+    {
+      "id": "P10",
+      "name": "Pilar Sul Divisa Banhos (Master e 2)",
+      "x": 5.801,
+      "z": 10.875,
+      "width_x": 0.25,
+      "depth_z": 0.6,
+      "height": 2.7
+    },
+    {
+      "id": "P9",
+      "name": "Pilar Sul Suíte 2 / Técnico",
+      "x": 9.94,
+      "z": 10.866,
+      "width_x": 0.25,
+      "depth_z": 0.6,
+      "height": 2.7
+    }
+  ]
+}

@@ -1,0 +1,343 @@
+{
+  "zone_name": "Suíte 1, Banho 1 e Terraço Técnico",
+  "pdf_source": {
+    "file": "CONSTRUCOMPANY_HI VIEW_FINAIS 1 E 6_REV02.pdf",
+    "pages_audited": [
+      0,
+      3,
+      5,
+      10
+    ],
+    "scale": "1:75 (1m = 37.7953 pt / 37.7778 pt)"
+  },
+  "rooms": [
+    {
+      "id": "banho1",
+      "name": "Banho 1 (Banheiro da Suíte 1)",
+      "bounding_box": [
+        10.15,
+        3.18,
+        12.86,
+        4.81
+      ],
+      "area_m2": 3.6,
+      "floor_finish": "tile_light / porcelanato",
+      "spawn_point": [
+        11.5,
+        1.6,
+        4.0,
+        0
+      ]
+    },
+    {
+      "id": "suite1",
+      "name": "Suíte 1 (Dormitório)",
+      "bounding_box": [
+        10.15,
+        4.81,
+        12.86,
+        7.65
+      ],
+      "area_m2": 10.5,
+      "floor_finish": "wood / piso vinílico amadeirado",
+      "spawn_point": [
+        11.5,
+        1.6,
+        6.2,
+        0
+      ]
+    },
+    {
+      "id": "terraco_tecnico",
+      "name": "Terraço Técnico (Varanda de AC)",
+      "bounding_box": [
+        10.17,
+        7.65,
+        12.63,
+        8.98
+      ],
+      "area_m2": 2.8,
+      "floor_finish": "deck_or_tile / cerâmica técnica",
+      "spawn_point": [
+        11.4,
+        1.6,
+        8.3,
+        0
+      ]
+    }
+  ],
+  "walls": [
+    {
+      "id": "ext_north_bath1",
+      "description": "Parede Norte do Banho 1 (divisa com Hall Social / duto)",
+      "x1": 10.15,
+      "z1": 3.18,
+      "x2": 12.86,
+      "z2": 3.18,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "ext_east_bath1",
+      "description": "Parede Leste externa do Banho 1 com janela alta maxim-ar",
+      "x1": 12.86,
+      "z1": 3.18,
+      "x2": 12.86,
+      "z2": 4.81,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": [
+        {
+          "type": "window",
+          "subtype": "maxim-ar",
+          "label": "Janela Banho 1 (Maxim-ar 0.60x0.60m)",
+          "start": 0.5,
+          "width": 0.6,
+          "height": 0.6,
+          "sill": 1.7
+        }
+      ]
+    },
+    {
+      "id": "int_bath1_suite1_div",
+      "description": "Parede divisória entre Banho 1 e Suíte 1 (parede fechada contínua)",
+      "x1": 10.15,
+      "z1": 4.81,
+      "x2": 12.86,
+      "z2": 4.81,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_suite1_west_wall",
+      "description": "Parede Oeste da Suíte 1 e Banho 1 com portas do Banho 1 e Suíte 1",
+      "x1": 10.15,
+      "z1": 3.18,
+      "x2": 10.15,
+      "z2": 7.65,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "label": "Porta Banho 1 (0.70m)",
+          "start": 0.4,
+          "width": 0.7,
+          "height": 2.1,
+          "direction": "inward_banho1"
+        },
+        {
+          "type": "door",
+          "label": "Porta Suíte 1 (0.80m)",
+          "start": 3.5,
+          "width": 0.8,
+          "height": 2.1,
+          "direction": "inward_suite1"
+        }
+      ]
+    },
+    {
+      "id": "ext_east_suite1_solid_acoustic",
+      "description": "Parede Leste da Suíte 1 (Alvenaria sólida em bloco acústico cega contínua)",
+      "x1": 12.86,
+      "z1": 4.81,
+      "x2": 12.86,
+      "z2": 7.65,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "material": "acoustic_masonry_solid",
+      "notes": "Divisa com o apartamento vizinho de final 2. Totalmente cega sem aberturas.",
+      "openings": []
+    },
+    {
+      "id": "int_suite1_south_facade_window",
+      "description": "Parede Sul da Suíte 1 voltada para o Terraço Técnico com esquadria de correr",
+      "x1": 10.15,
+      "z1": 7.65,
+      "x2": 12.86,
+      "z2": 7.65,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": [
+        {
+          "type": "sliding_window",
+          "subtype": "correr_2_folhas",
+          "label": "Janela Suíte 1 (Esquadria de Correr p/ Varanda Técnica)",
+          "start": 0.4,
+          "width": 1.8,
+          "height": 1.4,
+          "sill": 0.85
+        }
+      ]
+    },
+    {
+      "id": "ext_east_tech_balcony",
+      "description": "Guarda-corpo Leste do Terraço Técnico",
+      "x1": 12.63,
+      "z1": 7.79,
+      "x2": 12.63,
+      "z2": 8.98,
+      "thick": 0.15,
+      "height": 1.2,
+      "type": "railing",
+      "openings": []
+    },
+    {
+      "id": "ext_south_tech_balcony",
+      "description": "Guarda-corpo Sul do Terraço Técnico (Guarda-corpo h=1,20m)",
+      "x1": 10.17,
+      "z1": 8.98,
+      "x2": 12.63,
+      "z2": 8.98,
+      "thick": 0.15,
+      "height": 1.2,
+      "type": "railing",
+      "openings": []
+    },
+    {
+      "id": "ext_west_tech_balcony",
+      "description": "Guarda-corpo / Mureta Oeste do Terraço Técnico (divisa Suíte 2)",
+      "x1": 10.17,
+      "z1": 7.79,
+      "x2": 10.17,
+      "z2": 8.98,
+      "thick": 0.15,
+      "height": 1.2,
+      "type": "railing",
+      "openings": []
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "fix_bath1_vanity",
+      "type": "vanity",
+      "room": "banho1",
+      "label": "Bancada em pedra com cuba e torneira",
+      "x": 11.5,
+      "z": 3.48,
+      "w": 1.2,
+      "d": 0.55,
+      "h": 0.85,
+      "material": "marble_white",
+      "has_sink": true,
+      "sink_type": "single_cuba",
+      "has_carenagem": true
+    },
+    {
+      "id": "fix_bath1_toilet",
+      "type": "toilet",
+      "room": "banho1",
+      "label": "Vaso sanitário com caixa acoplada",
+      "x": 12.4,
+      "z": 4.1,
+      "w": 0.45,
+      "d": 0.65,
+      "h": 0.8,
+      "material": "ceramic_white"
+    },
+    {
+      "id": "fix_bath1_glass_box",
+      "type": "shower_box",
+      "room": "banho1",
+      "label": "Box de vidro temperado e ducha",
+      "x": 10.6,
+      "z": 4.1,
+      "w": 0.85,
+      "d": 1.2,
+      "h": 2.1,
+      "material": "glass_screen"
+    },
+    {
+      "id": "fix_ac_condenser_niche",
+      "type": "ac_condenser",
+      "room": "terraco_tecnico",
+      "label": "Nicho técnico com condensadoras de Ar Condicionado",
+      "x": 11.4,
+      "z": 8.3,
+      "w": 0.9,
+      "d": 0.45,
+      "h": 0.75,
+      "material": "ac_condenser_unit",
+      "multi_split": true
+    }
+  ],
+  "shafts": [
+    {
+      "id": "S4",
+      "name": "Shaft Banho 1",
+      "room": "banho1",
+      "x": 12.6,
+      "z": 3.4,
+      "w": 0.45,
+      "d": 0.4,
+      "h": 2.7,
+      "prumadas": [
+        "Esgoto (E)",
+        "Ventilação (V)",
+        "Água Pluvial (AP)",
+        "Água Fria/Quente PEX"
+      ]
+    },
+    {
+      "id": "S7",
+      "name": "Shaft Terraço Técnico AC & Carenagem",
+      "room": "terraco_tecnico",
+      "x": 10.45,
+      "z": 8.0,
+      "w": 0.45,
+      "d": 0.4,
+      "h": 2.7,
+      "prumadas": [
+        "Dreno AC (D)",
+        "Descida Pluvial (AP)",
+        "Carenagem Técnica"
+      ]
+    }
+  ],
+  "pillars": [
+    {
+      "id": "P6",
+      "name": "Pilar Hall / Banho 1",
+      "x": 11.8,
+      "z": 3.18,
+      "w": 0.25,
+      "d": 0.5,
+      "h": 2.7
+    },
+    {
+      "id": "P7",
+      "name": "Pilar Fachada Leste / Suíte 1 e Terraço Técnico",
+      "x": 12.86,
+      "z": 4.81,
+      "w": 0.25,
+      "d": 0.6,
+      "h": 2.7
+    },
+    {
+      "id": "P8",
+      "name": "Pilar Terraço Técnico Leste",
+      "x": 12.63,
+      "z": 7.79,
+      "w": 0.25,
+      "d": 0.5,
+      "h": 2.7
+    },
+    {
+      "id": "P9",
+      "name": "Pilar Sul Suíte 2 / Técnico",
+      "x": 10.15,
+      "z": 10.88,
+      "w": 0.25,
+      "d": 0.6,
+      "h": 2.7
+    }
+  ]
+}

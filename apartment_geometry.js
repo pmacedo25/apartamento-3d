@@ -1,1035 +1,34 @@
 window.APARTMENT_GEOMETRY = {
   "scale": "1:75",
   "private_area_m2": 125.79,
-  "walls": [
-    {
-      "height": 2.7,
-      "id": "ext_north_service",
-      "openings": [
-        {
-          "height": 0.8,
-          "label": "Ventilação Serviço",
-          "sill": 1.6,
-          "start": 0.5,
-          "type": "ventilation",
-          "width": 1.2
-        }
-      ],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 0.95,
-      "x2": 3.48,
-      "z1": 0.44,
-      "z2": 0.44
-    },
-    {
-      "height": 2.7,
-      "id": "ext_north_kitchen",
-      "openings": [],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 3.48,
-      "x2": 8.6,
-      "z1": 0.44,
-      "z2": 0.44
-    },
-    {
-      "height": 2.7,
-      "id": "ext_north_lavabo",
-      "openings": [],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 8.6,
-      "x2": 9.95,
-      "z1": 0.44,
-      "z2": 0.44
-    },
-    {
-      "height": 2.7,
-      "id": "ext_north_hall_recess",
-      "openings": [],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 9.95,
-      "x2": 9.95,
-      "z1": 0.44,
-      "z2": 1.01
-    },
-    {
-      "height": 2.7,
-      "id": "ext_north_hall_front",
-      "openings": [
-        {
-          "height": 2.1,
-          "label": "Entrada Social",
-          "start": 0.45,
-          "type": "door",
-          "width": 0.9
-        }
-      ],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 9.95,
-      "x2": 11.8,
-      "z1": 1.01,
-      "z2": 1.01
-    },
-    {
-      "height": 2.7,
-      "id": "ext_east_hall",
-      "openings": [],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 11.8,
-      "x2": 11.8,
-      "z1": 1.01,
-      "z2": 3.18
-    },
-    {
-      "height": 2.7,
-      "id": "ext_hall_to_bath1",
-      "openings": [],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 11.8,
-      "x2": 12.86,
-      "z1": 3.18,
-      "z2": 3.18
-    },
-    {
-      "height": 2.7,
-      "id": "ext_east_bath1",
-      "openings": [
-        {
-          "height": 0.6,
-          "label": "Janela Banho 1",
-          "sill": 1.7,
-          "start": 0.5,
-          "type": "window",
-          "width": 0.6
-        }
-      ],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 12.86,
-      "x2": 12.86,
-      "z1": 3.18,
-      "z2": 4.81
-    },
-    {
-      "height": 2.7,
-      "id": "ext_east_suite1_solid_acoustic",
-      "openings": [],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 12.86,
-      "x2": 12.86,
-      "z1": 4.81,
-      "z2": 7.65
-    },
-    {
-      "height": 1.2,
-      "id": "ext_east_tech_balcony",
-      "openings": [],
-      "thick": 0.15,
-      "type": "railing",
-      "x1": 12.63,
-      "x2": 12.63,
-      "z1": 7.79,
-      "z2": 8.98
-    },
-    {
-      "height": 1.2,
-      "id": "ext_south_tech_balcony",
-      "openings": [],
-      "thick": 0.15,
-      "type": "railing",
-      "x1": 10.17,
-      "x2": 12.63,
-      "z1": 8.98,
-      "z2": 8.98
-    },
-    {
-      "height": 1.2,
-      "id": "ext_west_tech_balcony",
-      "openings": [],
-      "thick": 0.15,
-      "type": "railing",
-      "x1": 10.17,
-      "x2": 10.17,
-      "z1": 7.79,
-      "z2": 8.98
-    },
-    {
-      "height": 2.7,
-      "id": "ext_south_suite2",
-      "openings": [
-        {
-          "height": 1.3,
-          "label": "Janela Suíte 2",
-          "sill": 0.9,
-          "start": 0.7,
-          "type": "window",
-          "width": 1.4
-        }
-      ],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 7.28,
-      "x2": 10.15,
-      "z1": 10.88,
-      "z2": 10.88
-    },
-    {
-      "height": 2.7,
-      "id": "ext_east_suite2_wall",
-      "openings": [],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 10.15,
-      "x2": 10.15,
-      "z1": 7.79,
-      "z2": 10.88
-    },
-    {
-      "height": 2.7,
-      "id": "ext_south_bath2",
-      "openings": [
-        {
-          "height": 0.6,
-          "label": "Janela Banho 2",
-          "sill": 1.7,
-          "start": 0.45,
-          "type": "window",
-          "width": 0.6
-        }
-      ],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 5.8,
-      "x2": 7.28,
-      "z1": 10.88,
-      "z2": 10.88
-    },
-    {
-      "height": 2.7,
-      "id": "ext_south_bath_master",
-      "openings": [
-        {
-          "height": 0.6,
-          "label": "Janela Banho Master",
-          "sill": 1.7,
-          "start": 0.55,
-          "type": "window",
-          "width": 0.65
-        }
-      ],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 4.05,
-      "x2": 5.8,
-      "z1": 10.88,
-      "z2": 10.88
-    },
-    {
-      "height": 2.7,
-      "id": "ext_south_suite_master_solid",
-      "openings": [],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 0.94,
-      "x2": 4.05,
-      "z1": 10.88,
-      "z2": 10.88
-    },
-    {
-      "height": 2.7,
-      "id": "ext_west_suite_master",
-      "openings": [
-        {
-          "height": 1.3,
-          "label": "Janela Suíte Master",
-          "sill": 0.9,
-          "start": 1.2,
-          "type": "window",
-          "width": 1.6
-        }
-      ],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 0.94,
-      "x2": 0.94,
-      "z1": 6.75,
-      "z2": 10.88
-    },
-    {
-      "height": 1.2,
-      "id": "ext_west_terrace_balcony",
-      "openings": [],
-      "thick": 0.15,
-      "type": "railing",
-      "x1": 0.4,
-      "x2": 0.4,
-      "z1": 2.18,
-      "z2": 6.75
-    },
-    {
-      "height": 2.7,
-      "id": "ext_west_service",
-      "openings": [],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 0.95,
-      "x2": 0.95,
-      "z1": 0.44,
-      "z2": 2.18
-    },
-    {
-      "height": 1.2,
-      "id": "terrace_recess_top",
-      "openings": [],
-      "thick": 0.15,
-      "type": "railing",
-      "x1": 0.4,
-      "x2": 0.95,
-      "z1": 2.18,
-      "z2": 2.18
-    },
-    {
-      "height": 2.7,
-      "id": "terrace_recess_bottom",
-      "openings": [],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 0.4,
-      "x2": 0.94,
-      "z1": 6.75,
-      "z2": 6.75
-    },
-    {
-      "height": 2.7,
-      "id": "int_service_kitchen_div",
-      "openings": [
-        {
-          "height": 2.1,
-          "label": "Porta Serviço",
-          "start": 0.45,
-          "type": "door",
-          "width": 0.8
-        }
-      ],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 3.48,
-      "x2": 3.48,
-      "z1": 0.44,
-      "z2": 2.18
-    },
-    {
-      "height": 2.7,
-      "id": "int_kitchen_terrace_wall",
-      "openings": [
-        {
-          "height": 2.1,
-          "label": "Acesso Cozinha/Terraço",
-          "start": 1.65,
-          "type": "door",
-          "width": 0.8
-        }
-      ],
-      "thick": 0.15,
-      "type": "interior",
-      "x1": 0.95,
-      "x2": 3.48,
-      "z1": 2.18,
-      "z2": 2.18
-    },
-    {
-      "height": 2.7,
-      "id": "int_kitchen_living_wall",
-      "openings": [],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 4.7,
-      "x2": 7.61,
-      "z1": 2.13,
-      "z2": 2.13
-    },
-    {
-      "height": 2.7,
-      "id": "int_lavabo_west_wall",
-      "openings": [],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 8.6,
-      "x2": 8.6,
-      "z1": 0.44,
-      "z2": 1.98
-    },
-    {
-      "height": 2.7,
-      "id": "int_lavabo_south_wall",
-      "openings": [
-        {
-          "height": 2.1,
-          "label": "Porta Lavabo",
-          "start": 0.35,
-          "type": "door",
-          "width": 0.7
-        }
-      ],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 8.6,
-      "x2": 9.95,
-      "z1": 1.98,
-      "z2": 1.98
-    },
-    {
-      "height": 2.7,
-      "id": "int_hall_living_div",
-      "openings": [
-        {
-          "height": 2.1,
-          "label": "Acesso Living",
-          "start": 0.15,
-          "type": "door",
-          "width": 0.95
-        }
-      ],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 9.95,
-      "x2": 9.95,
-      "z1": 1.98,
-      "z2": 3.18
-    },
-    {
-      "height": 2.7,
-      "id": "esquadria_living_terraco",
-      "openings": [
-        {
-          "height": 2.4,
-          "label": "Esquadria Living/Terraço",
-          "start": 0.3,
-          "type": "sliding_door",
-          "width": 3.9
-        }
-      ],
-      "thick": 0.1,
-      "type": "glass_slider",
-      "x1": 4.7,
-      "x2": 4.7,
-      "z1": 2.18,
-      "z2": 6.75
-    },
-    {
-      "height": 2.7,
-      "id": "int_living_to_corridor",
-      "openings": [
-        {
-          "height": 2.4,
-          "label": "Acesso Circulação Íntima",
-          "start": 2.4,
-          "type": "passage",
-          "width": 1.1
-        }
-      ],
-      "thick": 0.15,
-      "type": "interior",
-      "x1": 4.7,
-      "x2": 8.42,
-      "z1": 6.6,
-      "z2": 6.6
-    },
-    {
-      "height": 2.7,
-      "id": "int_bath1_suite1_div",
-      "openings": [],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 10.15,
-      "x2": 12.86,
-      "z1": 4.81,
-      "z2": 4.81
-    },
-    {
-      "height": 2.7,
-      "id": "int_suite1_west_wall",
-      "openings": [
-        {
-          "height": 2.1,
-          "label": "Porta Banho 1",
-          "start": 0.4,
-          "type": "door",
-          "width": 0.7
-        },
-        {
-          "height": 2.1,
-          "label": "Porta Suíte 1",
-          "start": 3.5,
-          "type": "door",
-          "width": 0.8
-        }
-      ],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 10.15,
-      "x2": 10.15,
-      "z1": 3.18,
-      "z2": 7.65
-    },
-    {
-      "height": 2.7,
-      "id": "int_suite1_south_facade_window",
-      "openings": [
-        {
-          "height": 1.4,
-          "label": "Janela Suíte 1 (Varanda Técnica)",
-          "sill": 0.85,
-          "start": 0.4,
-          "type": "sliding_window",
-          "width": 1.8
-        }
-      ],
-      "thick": 0.19,
-      "type": "exterior",
-      "x1": 10.15,
-      "x2": 12.86,
-      "z1": 7.65,
-      "z2": 7.65
-    },
-    {
-      "height": 2.7,
-      "id": "int_roupeiro_niche",
-      "openings": [],
-      "thick": 0.12,
-      "type": "interior",
-      "x1": 8.34,
-      "x2": 9.95,
-      "z1": 7.65,
-      "z2": 7.65
-    },
-    {
-      "height": 2.7,
-      "id": "int_suite2_north_wall",
-      "openings": [
-        {
-          "height": 2.1,
-          "label": "Porta Suíte 2",
-          "start": 0.2,
-          "type": "door",
-          "width": 0.8
-        }
-      ],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 7.28,
-      "x2": 10.15,
-      "z1": 8.35,
-      "z2": 8.35
-    },
-    {
-      "height": 2.7,
-      "id": "int_bath2_to_suite2",
-      "openings": [],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 7.28,
-      "x2": 7.28,
-      "z1": 8.35,
-      "z2": 10.88
-    },
-    {
-      "height": 2.7,
-      "id": "int_bath2_north_wall",
-      "openings": [
-        {
-          "height": 2.1,
-          "label": "Porta Banho 2",
-          "start": 0.7,
-          "type": "door",
-          "width": 0.7
-        }
-      ],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 5.8,
-      "x2": 7.28,
-      "z1": 8.4,
-      "z2": 8.4
-    },
-    {
-      "height": 2.7,
-      "id": "int_bath_master_to_bath2",
-      "openings": [],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 5.8,
-      "x2": 5.8,
-      "z1": 8.4,
-      "z2": 10.88
-    },
-    {
-      "height": 2.7,
-      "id": "int_master_to_terrace",
-      "openings": [],
-      "thick": 0.15,
-      "type": "interior",
-      "x1": 0.94,
-      "x2": 4.7,
-      "z1": 6.75,
-      "z2": 6.75
-    },
-    {
-      "height": 2.7,
-      "id": "int_corridor_to_suite_master",
-      "openings": [
-        {
-          "height": 2.1,
-          "label": "Porta Suíte Master",
-          "start": 0.75,
-          "type": "door",
-          "width": 0.8
-        }
-      ],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 7.28,
-      "x2": 7.28,
-      "z1": 6.6,
-      "z2": 8.35
-    },
-    {
-      "height": 2.7,
-      "id": "int_master_to_bath_master_solid",
-      "openings": [],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 4.05,
-      "x2": 4.05,
-      "z1": 8.4,
-      "z2": 10.88
-    },
-    {
-      "height": 2.7,
-      "id": "int_bath_master_north_wall",
-      "openings": [
-        {
-          "height": 2.1,
-          "label": "Porta Banho Master",
-          "start": 0.7,
-          "type": "door",
-          "width": 0.7
-        }
-      ],
-      "thick": 0.14,
-      "type": "interior",
-      "x1": 4.05,
-      "x2": 5.8,
-      "z1": 8.4,
-      "z2": 8.4
-    }
-  ],
-  "pillars": [
-    {
-      "d": 0.6,
-      "h": 2.7,
-      "id": "P1",
-      "name": "Pilar Varanda Noroeste",
-      "w": 0.25,
-      "x": 0.4,
-      "z": 2.18
-    },
-    {
-      "d": 0.55,
-      "h": 2.7,
-      "id": "P2",
-      "name": "Pilar Divisa Serviço/Cozinha",
-      "w": 0.25,
-      "x": 3.48,
-      "z": 2.18
-    },
-    {
-      "d": 0.6,
-      "h": 2.7,
-      "id": "P3",
-      "name": "Pilar Varanda Sudoeste",
-      "w": 0.25,
-      "x": 0.4,
-      "z": 6.75
-    },
-    {
-      "d": 0.7,
-      "h": 2.7,
-      "id": "P4",
-      "name": "Pilar Esquadria Terraço/Living Sul",
-      "w": 0.25,
-      "x": 4.7,
-      "z": 6.75
-    },
-    {
-      "d": 0.5,
-      "h": 2.7,
-      "id": "P5",
-      "name": "Pilar Hall / Lavabo",
-      "w": 0.3,
-      "x": 9.95,
-      "z": 1.01
-    },
-    {
-      "d": 0.5,
-      "h": 2.7,
-      "id": "P6",
-      "name": "Pilar Hall / Banho 1",
-      "w": 0.25,
-      "x": 11.8,
-      "z": 3.18
-    },
-    {
-      "d": 0.6,
-      "h": 2.7,
-      "id": "P7",
-      "name": "Pilar Fachada Banho 1 / Suíte 1",
-      "w": 0.25,
-      "x": 12.86,
-      "z": 4.81
-    },
-    {
-      "d": 0.5,
-      "h": 2.7,
-      "id": "P8",
-      "name": "Pilar Terraço Técnico",
-      "w": 0.25,
-      "x": 12.63,
-      "z": 7.79
-    },
-    {
-      "d": 0.6,
-      "h": 2.7,
-      "id": "P9",
-      "name": "Pilar Sul Suíte 2 / Técnico",
-      "w": 0.25,
-      "x": 10.15,
-      "z": 10.88
-    },
-    {
-      "d": 0.6,
-      "h": 2.7,
-      "id": "P10",
-      "name": "Pilar Sul Divisa Banhos",
-      "w": 0.25,
-      "x": 5.8,
-      "z": 10.88
-    },
-    {
-      "d": 0.6,
-      "h": 2.7,
-      "id": "P11",
-      "name": "Pilar Sul Canto Master",
-      "w": 0.25,
-      "x": 0.94,
-      "z": 10.88
-    }
-  ],
-  "shafts": [
-    {
-      "d": 0.45,
-      "h": 2.7,
-      "id": "S1",
-      "name": "Shaft Churrasqueira / Gourmet",
-      "w": 0.45,
-      "x": 1.25,
-      "z": 2.45
-    },
-    {
-      "d": 0.3,
-      "h": 2.7,
-      "id": "S2",
-      "name": "Shaft Cozinha / Prumada Norte",
-      "w": 0.4,
-      "x": 5.4,
-      "z": 0.6
-    },
-    {
-      "d": 0.3,
-      "h": 2.7,
-      "id": "S3",
-      "name": "Shaft Lavabo",
-      "w": 0.35,
-      "x": 9.75,
-      "z": 0.6
-    },
-    {
-      "d": 0.4,
-      "h": 2.7,
-      "id": "S4",
-      "name": "Shaft Banho 1",
-      "w": 0.45,
-      "x": 12.6,
-      "z": 3.4
-    },
-    {
-      "d": 0.45,
-      "h": 2.7,
-      "id": "S5",
-      "name": "Shaft Banho Master",
-      "w": 0.38,
-      "x": 4.25,
-      "z": 8.65
-    },
-    {
-      "d": 0.45,
-      "h": 2.7,
-      "id": "S6",
-      "name": "Shaft Banho 2",
-      "w": 0.38,
-      "x": 7.05,
-      "z": 8.65
-    },
-    {
-      "d": 0.4,
-      "h": 2.7,
-      "id": "S7",
-      "name": "Shaft Terraço Técnico AC",
-      "w": 0.45,
-      "x": 10.45,
-      "z": 8.0
-    }
-  ],
-  "fixtures": [
-    {
-      "d": 0.6,
-      "h": 0.9,
-      "has_sink": true,
-      "id": "fix_kitchen_counter",
-      "material": "granite_black",
-      "room": "Cozinha",
-      "sink_type": "kitchen_single",
-      "sink_x": 6.0,
-      "type": "countertop",
-      "w": 4.5,
-      "x": 6.0,
-      "z": 0.74
-    },
-    {
-      "d": 0.55,
-      "h": 0.85,
-      "has_sink": true,
-      "id": "fix_service_tub",
-      "material": "ceramic_white",
-      "room": "Área de Serviço",
-      "sink_type": "laundry",
-      "sink_x": 1.7,
-      "type": "laundry_tub",
-      "w": 0.6,
-      "x": 1.7,
-      "z": 0.7
-    },
-    {
-      "d": 0.65,
-      "h": 0.9,
-      "has_sink": true,
-      "id": "fix_gourmet_counter",
-      "material": "granite_black",
-      "room": "Terraço Gourmet",
-      "sink_type": "round_prep",
-      "sink_x": 2.6,
-      "type": "countertop",
-      "w": 1.8,
-      "x": 2.2,
-      "z": 2.45
-    },
-    {
-      "d": 0.65,
-      "h": 1.1,
-      "has_sink": false,
-      "id": "fix_gourmet_bbq",
-      "material": "masonry_dark",
-      "room": "Terraço Gourmet",
-      "sink_type": null,
-      "sink_x": null,
-      "type": "barbecue",
-      "w": 0.8,
-      "x": 1.6,
-      "z": 2.45
-    },
-    {
-      "d": 0.55,
-      "h": 0.85,
-      "has_sink": true,
-      "id": "fix_bath_master_vanity",
-      "material": "marble_white",
-      "room": "Banho Master",
-      "sink_type": "double_cuba",
-      "sink_x": 4.92,
-      "type": "vanity_double",
-      "w": 1.5,
-      "x": 4.92,
-      "z": 8.68
-    },
-    {
-      "d": 0.65,
-      "h": 0.8,
-      "has_sink": false,
-      "id": "fix_bath_master_toilet",
-      "material": "ceramic_white",
-      "room": "Banho Master",
-      "sink_type": null,
-      "sink_x": null,
-      "type": "toilet",
-      "w": 0.45,
-      "x": 5.45,
-      "z": 9.4
-    },
-    {
-      "d": 0.9,
-      "h": 2.1,
-      "has_sink": false,
-      "id": "fix_bath_master_glass_box",
-      "material": "glass_screen",
-      "room": "Banho Master",
-      "sink_type": null,
-      "sink_x": null,
-      "type": "shower_box",
-      "w": 1.5,
-      "x": 4.92,
-      "z": 10.3
-    },
-    {
-      "d": 0.55,
-      "h": 0.85,
-      "has_sink": true,
-      "id": "fix_bath2_vanity",
-      "material": "marble_white",
-      "room": "Banho 2",
-      "sink_type": "single_cuba",
-      "sink_x": 6.54,
-      "type": "vanity",
-      "w": 1.2,
-      "x": 6.54,
-      "z": 8.68
-    },
-    {
-      "d": 0.65,
-      "h": 0.8,
-      "has_sink": false,
-      "id": "fix_bath2_toilet",
-      "material": "ceramic_white",
-      "room": "Banho 2",
-      "sink_type": null,
-      "sink_x": null,
-      "type": "toilet",
-      "w": 0.45,
-      "x": 6.0,
-      "z": 9.4
-    },
-    {
-      "d": 0.9,
-      "h": 2.1,
-      "has_sink": false,
-      "id": "fix_bath2_glass_box",
-      "material": "glass_screen",
-      "room": "Banho 2",
-      "sink_type": null,
-      "sink_x": null,
-      "type": "shower_box",
-      "w": 1.2,
-      "x": 6.54,
-      "z": 10.3
-    },
-    {
-      "d": 0.55,
-      "h": 0.85,
-      "has_sink": true,
-      "id": "fix_bath1_vanity",
-      "material": "marble_white",
-      "room": "Banho 1",
-      "sink_type": "single_cuba",
-      "sink_x": 11.5,
-      "type": "vanity",
-      "w": 1.2,
-      "x": 11.5,
-      "z": 3.48
-    },
-    {
-      "d": 0.65,
-      "h": 0.8,
-      "has_sink": false,
-      "id": "fix_bath1_toilet",
-      "material": "ceramic_white",
-      "room": "Banho 1",
-      "sink_type": null,
-      "sink_x": null,
-      "type": "toilet",
-      "w": 0.45,
-      "x": 12.4,
-      "z": 4.1
-    },
-    {
-      "d": 1.2,
-      "h": 2.1,
-      "has_sink": false,
-      "id": "fix_bath1_glass_box",
-      "material": "glass_screen",
-      "room": "Banho 1",
-      "sink_type": null,
-      "sink_x": null,
-      "type": "shower_box",
-      "w": 0.85,
-      "x": 10.6,
-      "z": 4.1
-    },
-    {
-      "d": 0.5,
-      "h": 0.85,
-      "has_sink": true,
-      "id": "fix_lavabo_vanity",
-      "material": "marble_white",
-      "room": "Lavabo",
-      "sink_type": "single_cuba",
-      "sink_x": 9.3,
-      "type": "vanity",
-      "w": 1.0,
-      "x": 9.3,
-      "z": 0.75
-    },
-    {
-      "d": 0.65,
-      "h": 0.8,
-      "has_sink": false,
-      "id": "fix_lavabo_toilet",
-      "material": "ceramic_white",
-      "room": "Lavabo",
-      "sink_type": null,
-      "sink_x": null,
-      "type": "toilet",
-      "w": 0.45,
-      "x": 8.9,
-      "z": 1.4
-    }
-  ],
+  "dimensions": {
+    "width": 13.5,
+    "depth": 11.38,
+    "height": 2.7
+  },
   "rooms": [
     {
-      "area": 24.5,
+      "id": "sala",
+      "name": "Living & Estar / Jantar",
+      "area": 24.35,
       "box": [
         4.7,
-        2.13,
-        9.95,
+        1.98,
+        10.15,
         6.6
       ],
       "floor": "tile_light",
-      "id": "living",
-      "name": "Living & Estar",
       "spawn": [
         7.0,
         1.6,
-        4.5,
+        4.4,
         -1.57
       ]
     },
     {
-      "area": 19.8,
+      "id": "terraco",
+      "name": "Terraço Gourmet",
+      "area": 19.65,
       "box": [
         0.4,
         2.18,
@@ -1037,8 +36,6 @@ window.APARTMENT_GEOMETRY = {
         6.75
       ],
       "floor": "deck_or_tile",
-      "id": "terraco",
-      "name": "Terraço Gourmet",
       "spawn": [
         2.5,
         1.6,
@@ -1047,96 +44,98 @@ window.APARTMENT_GEOMETRY = {
       ]
     },
     {
-      "area": 9.8,
+      "id": "cozinha",
+      "name": "Cozinha",
+      "area": 8.2,
       "box": [
-        3.48,
+        3.75,
         0.44,
         8.6,
         2.13
       ],
       "floor": "tile_light",
-      "id": "cozinha",
-      "name": "Cozinha",
       "spawn": [
-        6.0,
+        6.1,
         1.6,
         1.3,
         3.14
       ]
     },
     {
-      "area": 4.6,
+      "id": "servico",
+      "name": "Área de Serviço",
+      "area": 4.87,
       "box": [
         0.95,
         0.44,
-        3.48,
+        3.75,
         2.18
       ],
-      "floor": "tile_light",
-      "id": "servico",
-      "name": "Área de Serviço",
+      "floor": "tile_service",
       "spawn": [
-        2.2,
+        2.3,
         1.6,
         1.3,
-        0
+        0.0
       ]
     },
     {
-      "area": 3.8,
+      "id": "hall",
+      "name": "Hall Social Privativo",
+      "area": 3.43,
       "box": [
         9.95,
-        0.8,
+        0.44,
         11.8,
         3.18
       ],
       "floor": "tile_light",
-      "id": "hall",
-      "name": "Hall Social Privativo",
       "spawn": [
-        10.8,
+        10.85,
         1.6,
         1.8,
         1.57
       ]
     },
     {
-      "area": 2.1,
+      "id": "lavabo",
+      "name": "Lavabo Social",
+      "area": 1.82,
       "box": [
         8.6,
         0.44,
         9.95,
         1.98
       ],
-      "floor": "tile_light",
-      "id": "lavabo",
-      "name": "Lavabo",
+      "floor": "tile_dark",
       "spawn": [
-        9.25,
+        9.3,
         1.6,
         1.2,
-        0
+        0.0
       ]
     },
     {
+      "id": "circulacao",
+      "name": "Circulação Íntima & Roupeiro",
       "area": 4.5,
       "box": [
         7.28,
         6.6,
         10.15,
-        8.35
+        8.36
       ],
       "floor": "wood",
-      "id": "circulacao",
-      "name": "Circulação Íntima & Roupeiro",
       "spawn": [
-        8.5,
+        8.6,
         1.6,
         7.2,
         1.57
       ]
     },
     {
+      "id": "suite_master",
+      "name": "Suíte Master",
       "area": 15.2,
       "box": [
         0.94,
@@ -1145,8 +144,6 @@ window.APARTMENT_GEOMETRY = {
         10.88
       ],
       "floor": "wood",
-      "id": "suite_master",
-      "name": "Suíte Master",
       "spawn": [
         2.5,
         1.6,
@@ -1155,6 +152,8 @@ window.APARTMENT_GEOMETRY = {
       ]
     },
     {
+      "id": "closet_master",
+      "name": "Closet Master",
       "area": 4.2,
       "box": [
         4.05,
@@ -1163,17 +162,17 @@ window.APARTMENT_GEOMETRY = {
         8.4
       ],
       "floor": "wood",
-      "id": "closet_master",
-      "name": "Closet Master",
       "spawn": [
         5.6,
         1.6,
         7.5,
-        0
+        0.0
       ]
     },
     {
-      "area": 4.3,
+      "id": "banho_master",
+      "name": "Banho Master (Cuba Dupla)",
+      "area": 4.34,
       "box": [
         4.05,
         8.4,
@@ -1181,35 +180,35 @@ window.APARTMENT_GEOMETRY = {
         10.88
       ],
       "floor": "tile_light",
-      "id": "banho_master",
-      "name": "Banho Master (Cuba Dupla)",
       "spawn": [
         4.92,
         1.6,
         9.4,
-        0
+        0.0
       ]
     },
     {
+      "id": "suite2",
+      "name": "Suíte 2",
       "area": 10.8,
       "box": [
-        7.28,
-        8.35,
-        10.15,
+        7.44,
+        7.65,
+        9.94,
         10.88
       ],
       "floor": "wood",
-      "id": "suite2",
-      "name": "Suíte 2",
       "spawn": [
         8.7,
         1.6,
         9.6,
-        0
+        0.0
       ]
     },
     {
-      "area": 3.7,
+      "id": "banho2",
+      "name": "Banho 2",
+      "area": 3.3,
       "box": [
         5.8,
         8.4,
@@ -1217,16 +216,16 @@ window.APARTMENT_GEOMETRY = {
         10.88
       ],
       "floor": "tile_light",
-      "id": "banho2",
-      "name": "Banho 2",
       "spawn": [
         6.54,
         1.6,
         9.4,
-        0
+        0.0
       ]
     },
     {
+      "id": "suite1",
+      "name": "Suíte 1",
       "area": 10.5,
       "box": [
         10.15,
@@ -1235,16 +234,16 @@ window.APARTMENT_GEOMETRY = {
         7.65
       ],
       "floor": "wood",
-      "id": "suite1",
-      "name": "Suíte 1",
       "spawn": [
         11.5,
         1.6,
         6.2,
-        0
+        0.0
       ]
     },
     {
+      "id": "banho1",
+      "name": "Banho 1",
       "area": 3.6,
       "box": [
         10.15,
@@ -1253,16 +252,16 @@ window.APARTMENT_GEOMETRY = {
         4.81
       ],
       "floor": "tile_light",
-      "id": "banho1",
-      "name": "Banho 1",
       "spawn": [
         11.5,
         1.6,
         4.0,
-        0
+        0.0
       ]
     },
     {
+      "id": "terraco_tecnico",
+      "name": "Terraço Técnico (AC)",
       "area": 2.8,
       "box": [
         10.17,
@@ -1271,14 +270,1060 @@ window.APARTMENT_GEOMETRY = {
         8.98
       ],
       "floor": "deck_or_tile",
-      "id": "terraco_tecnico",
-      "name": "Terraço Técnico (AC)",
       "spawn": [
         11.4,
         1.6,
         8.3,
-        0
+        0.0
       ]
+    }
+  ],
+  "walls": [
+    {
+      "id": "ext_north_service",
+      "x1": 0.95,
+      "z1": 0.44,
+      "x2": 3.75,
+      "z2": 0.44,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": [
+        {
+          "type": "ventilation",
+          "start": 0.5,
+          "width": 1.2,
+          "sill": 1.6,
+          "height": 0.8,
+          "label": "Ventilação Serviço"
+        }
+      ]
+    },
+    {
+      "id": "ext_north_kitchen",
+      "x1": 3.75,
+      "z1": 0.44,
+      "x2": 8.6,
+      "z2": 0.44,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": []
+    },
+    {
+      "id": "ext_north_lavabo",
+      "x1": 8.6,
+      "z1": 0.44,
+      "x2": 9.95,
+      "z2": 0.44,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": []
+    },
+    {
+      "id": "ext_north_hall_recess",
+      "x1": 9.95,
+      "z1": 0.44,
+      "x2": 9.95,
+      "z2": 1.01,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": []
+    },
+    {
+      "id": "ext_north_hall_front",
+      "x1": 9.95,
+      "z1": 1.01,
+      "x2": 11.8,
+      "z2": 1.01,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": []
+    },
+    {
+      "id": "ext_east_hall",
+      "x1": 11.8,
+      "z1": 1.01,
+      "x2": 11.8,
+      "z2": 3.18,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": []
+    },
+    {
+      "id": "ext_hall_to_bath1",
+      "x1": 11.8,
+      "z1": 3.18,
+      "x2": 12.86,
+      "z2": 3.18,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": []
+    },
+    {
+      "id": "ext_east_bath1",
+      "x1": 12.86,
+      "z1": 3.18,
+      "x2": 12.86,
+      "z2": 4.81,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": [
+        {
+          "type": "window",
+          "start": 0.5,
+          "width": 0.6,
+          "sill": 1.7,
+          "height": 0.6,
+          "label": "Janela Banho 1"
+        }
+      ]
+    },
+    {
+      "id": "ext_east_suite1_solid_acoustic",
+      "x1": 12.86,
+      "z1": 4.81,
+      "x2": 12.86,
+      "z2": 7.65,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": []
+    },
+    {
+      "id": "ext_east_tech_balcony",
+      "x1": 12.63,
+      "z1": 7.79,
+      "x2": 12.63,
+      "z2": 8.98,
+      "thick": 0.15,
+      "height": 1.2,
+      "type": "railing",
+      "openings": []
+    },
+    {
+      "id": "ext_south_tech_balcony",
+      "x1": 10.17,
+      "z1": 8.98,
+      "x2": 12.63,
+      "z2": 8.98,
+      "thick": 0.15,
+      "height": 1.2,
+      "type": "railing",
+      "openings": []
+    },
+    {
+      "id": "ext_west_tech_balcony",
+      "x1": 10.17,
+      "z1": 7.79,
+      "x2": 10.17,
+      "z2": 8.98,
+      "thick": 0.15,
+      "height": 1.2,
+      "type": "railing",
+      "openings": []
+    },
+    {
+      "id": "ext_south_suite2",
+      "x1": 7.44,
+      "z1": 10.88,
+      "x2": 9.94,
+      "z2": 10.88,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": [
+        {
+          "type": "window",
+          "start": 0.4,
+          "width": 1.6,
+          "sill": 0.9,
+          "height": 1.3,
+          "label": "Janela Suíte 2"
+        }
+      ]
+    },
+    {
+      "id": "ext_east_suite2_wall",
+      "x1": 9.94,
+      "z1": 7.65,
+      "x2": 9.94,
+      "z2": 10.88,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": []
+    },
+    {
+      "id": "ext_south_bath2",
+      "x1": 5.8,
+      "z1": 10.88,
+      "x2": 7.44,
+      "z2": 10.88,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": [
+        {
+          "type": "window",
+          "start": 0.5,
+          "width": 0.6,
+          "sill": 1.7,
+          "height": 0.6,
+          "label": "Janela Banho 2"
+        }
+      ]
+    },
+    {
+      "id": "ext_south_bath_master",
+      "x1": 4.05,
+      "z1": 10.88,
+      "x2": 5.8,
+      "z2": 10.88,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": [
+        {
+          "type": "window",
+          "start": 0.55,
+          "width": 0.6,
+          "sill": 1.7,
+          "height": 0.6,
+          "label": "Janela Banho Master"
+        }
+      ]
+    },
+    {
+      "id": "ext_south_suite_master_solid",
+      "x1": 0.94,
+      "z1": 10.88,
+      "x2": 4.05,
+      "z2": 10.88,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": []
+    },
+    {
+      "id": "ext_west_suite_master",
+      "x1": 0.94,
+      "z1": 6.75,
+      "x2": 0.94,
+      "z2": 10.88,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": [
+        {
+          "type": "window",
+          "start": 1.4,
+          "width": 1.6,
+          "sill": 0.9,
+          "height": 1.3,
+          "label": "Janela Suíte Master"
+        }
+      ]
+    },
+    {
+      "id": "ext_west_terrace_balcony",
+      "x1": 0.4,
+      "z1": 2.18,
+      "x2": 0.4,
+      "z2": 6.75,
+      "thick": 0.15,
+      "height": 1.2,
+      "type": "railing",
+      "openings": []
+    },
+    {
+      "id": "ext_west_service",
+      "x1": 0.95,
+      "z1": 0.44,
+      "x2": 0.95,
+      "z2": 2.18,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": []
+    },
+    {
+      "id": "terrace_recess_top",
+      "x1": 0.4,
+      "z1": 2.18,
+      "x2": 0.95,
+      "z2": 2.18,
+      "thick": 0.15,
+      "height": 1.2,
+      "type": "railing",
+      "openings": []
+    },
+    {
+      "id": "terrace_recess_bottom",
+      "x1": 0.4,
+      "z1": 6.75,
+      "x2": 0.94,
+      "z2": 6.75,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": []
+    },
+    {
+      "id": "int_service_kitchen_div",
+      "x1": 3.75,
+      "z1": 0.44,
+      "x2": 3.75,
+      "z2": 2.18,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "start": 0.55,
+          "width": 0.8,
+          "height": 2.1,
+          "label": "Porta Serviço"
+        }
+      ]
+    },
+    {
+      "id": "int_service_terrace_wall",
+      "x1": 0.95,
+      "z1": 2.18,
+      "x2": 3.75,
+      "z2": 2.18,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_kitchen_terrace_wall",
+      "x1": 3.75,
+      "z1": 2.18,
+      "x2": 4.7,
+      "z2": 2.18,
+      "thick": 0.15,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "start": 0.15,
+          "width": 0.8,
+          "height": 2.1,
+          "label": "Acesso Cozinha/Terraço"
+        }
+      ]
+    },
+    {
+      "id": "int_kitchen_living_wall",
+      "x1": 4.7,
+      "z1": 2.13,
+      "x2": 7.61,
+      "z2": 2.13,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_lavabo_west_wall",
+      "x1": 8.6,
+      "z1": 0.44,
+      "x2": 8.6,
+      "z2": 2.13,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "start": 0.75,
+          "width": 0.82,
+          "height": 2.1,
+          "label": "Passagem Cozinha/Living"
+        }
+      ]
+    },
+    {
+      "id": "int_lavabo_south_wall",
+      "x1": 8.6,
+      "z1": 1.98,
+      "x2": 9.95,
+      "z2": 1.98,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "start": 0.35,
+          "width": 0.7,
+          "height": 2.1,
+          "label": "Porta Lavabo"
+        }
+      ]
+    },
+    {
+      "id": "int_hall_living_div",
+      "x1": 9.95,
+      "z1": 1.98,
+      "x2": 9.95,
+      "z2": 3.18,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "start": 0.15,
+          "width": 0.95,
+          "height": 2.1,
+          "label": "Porta Entrada Social"
+        }
+      ]
+    },
+    {
+      "id": "esquadria_living_terraco",
+      "x1": 4.7,
+      "z1": 2.18,
+      "x2": 4.7,
+      "z2": 6.75,
+      "thick": 0.1,
+      "height": 2.7,
+      "type": "glass_slider",
+      "openings": [
+        {
+          "type": "sliding_door",
+          "start": 0.3,
+          "width": 3.9,
+          "height": 2.4,
+          "label": "Esquadria Living/Terraço (3 Folhas Telescópicas)"
+        }
+      ]
+    },
+    {
+      "id": "int_living_to_corridor",
+      "x1": 4.7,
+      "z1": 6.6,
+      "x2": 8.43,
+      "z2": 6.6,
+      "thick": 0.15,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_bath1_suite1_div",
+      "x1": 10.15,
+      "z1": 4.81,
+      "x2": 12.86,
+      "z2": 4.81,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_suite1_west_wall",
+      "x1": 10.15,
+      "z1": 3.18,
+      "x2": 10.15,
+      "z2": 7.65,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "start": 0.4,
+          "width": 0.7,
+          "height": 2.1,
+          "label": "Porta Banho 1"
+        },
+        {
+          "type": "door",
+          "start": 3.5,
+          "width": 0.8,
+          "height": 2.1,
+          "label": "Porta Suíte 1"
+        }
+      ]
+    },
+    {
+      "id": "int_suite1_south_facade_window",
+      "x1": 10.15,
+      "z1": 7.65,
+      "x2": 12.86,
+      "z2": 7.65,
+      "thick": 0.19,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": [
+        {
+          "type": "sliding_window",
+          "start": 0.4,
+          "width": 1.8,
+          "sill": 0.85,
+          "height": 1.4,
+          "label": "Janela Suíte 1 (Varanda Técnica)"
+        }
+      ]
+    },
+    {
+      "id": "int_suite2_door_wall",
+      "x1": 7.44,
+      "z1": 8.36,
+      "x2": 8.33,
+      "z2": 8.36,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "start": 0.05,
+          "width": 0.8,
+          "height": 2.1,
+          "label": "Porta Suíte 2"
+        }
+      ]
+    },
+    {
+      "id": "int_roupeiro_niche_return",
+      "x1": 8.33,
+      "z1": 7.65,
+      "x2": 8.33,
+      "z2": 8.36,
+      "thick": 0.12,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_roupeiro_niche_back",
+      "x1": 8.33,
+      "z1": 7.65,
+      "x2": 9.94,
+      "z2": 7.65,
+      "thick": 0.12,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_bath2_to_suite2",
+      "x1": 7.28,
+      "z1": 8.41,
+      "x2": 7.28,
+      "z2": 10.88,
+      "thick": 0.16,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "start": 0.05,
+          "width": 0.7,
+          "height": 2.1,
+          "label": "Porta Banho 2"
+        }
+      ]
+    },
+    {
+      "id": "int_bath2_north_wall",
+      "x1": 5.8,
+      "z1": 8.4,
+      "x2": 7.28,
+      "z2": 8.4,
+      "thick": 0.16,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_bath_master_to_bath2",
+      "x1": 5.8,
+      "z1": 8.4,
+      "x2": 5.8,
+      "z2": 10.88,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_master_to_terrace",
+      "x1": 0.94,
+      "z1": 6.75,
+      "x2": 4.7,
+      "z2": 6.75,
+      "thick": 0.15,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_closet_to_living",
+      "x1": 4.7,
+      "z1": 6.75,
+      "x2": 7.28,
+      "z2": 6.75,
+      "thick": 0.15,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_corridor_to_suite_master",
+      "x1": 7.28,
+      "z1": 6.75,
+      "x2": 7.28,
+      "z2": 8.4,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "start": 0.61,
+          "width": 0.8,
+          "height": 2.1,
+          "label": "Porta Suíte Master"
+        }
+      ]
+    },
+    {
+      "id": "int_master_to_bath_master_solid",
+      "x1": 4.05,
+      "z1": 8.4,
+      "x2": 4.05,
+      "z2": 10.88,
+      "thick": 0.15,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_bath_master_north_wall",
+      "x1": 4.05,
+      "z1": 8.4,
+      "x2": 5.8,
+      "z2": 8.4,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "start": 0.7,
+          "width": 0.7,
+          "height": 2.1,
+          "label": "Porta Banho Master"
+        }
+      ]
+    }
+  ],
+  "pillars": [
+    {
+      "id": "P1",
+      "name": "Pilar Varanda Noroeste",
+      "x": 0.4,
+      "z": 2.18,
+      "w": 0.25,
+      "d": 0.6,
+      "h": 2.7
+    },
+    {
+      "id": "P2",
+      "name": "Pilar Divisa Cozinha/Terraço",
+      "x": 3.75,
+      "z": 2.18,
+      "w": 0.25,
+      "d": 0.55,
+      "h": 2.7
+    },
+    {
+      "id": "P3",
+      "name": "Pilar Varanda Sudoeste / Master",
+      "x": 0.4,
+      "z": 6.75,
+      "w": 0.25,
+      "d": 0.6,
+      "h": 2.7
+    },
+    {
+      "id": "P4",
+      "name": "Pilar Terraço / Living / Closet",
+      "x": 4.7,
+      "z": 6.75,
+      "w": 0.25,
+      "d": 0.7,
+      "h": 2.7
+    },
+    {
+      "id": "P5",
+      "name": "Pilar Hall / Lavabo",
+      "x": 9.95,
+      "z": 1.01,
+      "w": 0.3,
+      "d": 0.5,
+      "h": 2.7
+    },
+    {
+      "id": "P6",
+      "name": "Pilar Hall / Banho 1",
+      "x": 11.8,
+      "z": 3.18,
+      "w": 0.25,
+      "d": 0.5,
+      "h": 2.7
+    },
+    {
+      "id": "P7",
+      "name": "Pilar Fachada Leste / Suíte 1",
+      "x": 12.86,
+      "z": 4.81,
+      "w": 0.25,
+      "d": 0.6,
+      "h": 2.7
+    },
+    {
+      "id": "P8",
+      "name": "Pilar Terraço Técnico Leste",
+      "x": 12.63,
+      "z": 7.79,
+      "w": 0.25,
+      "d": 0.5,
+      "h": 2.7
+    },
+    {
+      "id": "P9",
+      "name": "Pilar Sul Suíte 2 / Técnico",
+      "x": 9.94,
+      "z": 10.88,
+      "w": 0.25,
+      "d": 0.6,
+      "h": 2.7
+    },
+    {
+      "id": "P10",
+      "name": "Pilar Sul Divisa Banhos",
+      "x": 5.8,
+      "z": 10.88,
+      "w": 0.25,
+      "d": 0.6,
+      "h": 2.7
+    },
+    {
+      "id": "P11",
+      "name": "Pilar Sul Canto Master",
+      "x": 0.94,
+      "z": 10.88,
+      "w": 0.25,
+      "d": 0.6,
+      "h": 2.7
+    }
+  ],
+  "shafts": [
+    {
+      "id": "S1",
+      "name": "Shaft Duto Churrasqueira Gourmet",
+      "x": 1.25,
+      "z": 2.45,
+      "w": 0.45,
+      "d": 0.45,
+      "h": 2.7
+    },
+    {
+      "id": "S2",
+      "name": "Shaft Cozinha / Prumada Norte",
+      "x": 5.4,
+      "z": 0.6,
+      "w": 0.4,
+      "d": 0.3,
+      "h": 2.7
+    },
+    {
+      "id": "S3",
+      "name": "Shaft Hidráulico Lavabo",
+      "x": 9.75,
+      "z": 0.6,
+      "w": 0.35,
+      "d": 0.3,
+      "h": 2.7
+    },
+    {
+      "id": "S4",
+      "name": "Shaft Banho 1",
+      "x": 12.6,
+      "z": 3.4,
+      "w": 0.45,
+      "d": 0.4,
+      "h": 2.7
+    },
+    {
+      "id": "S5",
+      "name": "Shaft Banho Master",
+      "x": 4.28,
+      "z": 10.46,
+      "w": 0.46,
+      "d": 0.84,
+      "h": 2.7
+    },
+    {
+      "id": "S6",
+      "name": "Shaft Banho 2",
+      "x": 6.12,
+      "z": 10.41,
+      "w": 0.36,
+      "d": 0.92,
+      "h": 2.7
+    },
+    {
+      "id": "S7",
+      "name": "Shaft Terraço Técnico AC & Carenagem",
+      "x": 10.45,
+      "z": 8.0,
+      "w": 0.45,
+      "d": 0.4,
+      "h": 2.7
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "fix_kitchen_counter",
+      "type": "countertop",
+      "room": "Cozinha",
+      "x": 6.09,
+      "z": 0.49,
+      "w": 2.45,
+      "d": 0.6,
+      "h": 0.9,
+      "material": "granite_black",
+      "has_sink": true,
+      "sink_x": 6.09,
+      "sink_type": "kitchen_single"
+    },
+    {
+      "id": "fix_service_tub",
+      "type": "laundry_tub",
+      "room": "Área de Serviço",
+      "x": 3.13,
+      "z": 0.68,
+      "w": 0.56,
+      "d": 0.4,
+      "h": 0.85,
+      "material": "ceramic_white",
+      "has_sink": true,
+      "sink_x": 3.13,
+      "sink_type": "laundry"
+    },
+    {
+      "id": "fix_gourmet_counter",
+      "type": "countertop",
+      "room": "Terraço Gourmet",
+      "x": 2.2,
+      "z": 2.45,
+      "w": 1.8,
+      "d": 0.65,
+      "h": 0.9,
+      "material": "granite_black",
+      "has_sink": true,
+      "sink_x": 2.6,
+      "sink_type": "round_prep"
+    },
+    {
+      "id": "fix_gourmet_bbq",
+      "type": "barbecue",
+      "room": "Terraço Gourmet",
+      "x": 1.6,
+      "z": 2.45,
+      "w": 0.8,
+      "d": 0.65,
+      "h": 1.1,
+      "material": "masonry_dark",
+      "has_sink": false,
+      "sink_x": null,
+      "sink_type": null
+    },
+    {
+      "id": "fix_bath_master_vanity",
+      "type": "vanity_double",
+      "room": "Banho Master",
+      "x": 4.32,
+      "z": 9.18,
+      "w": 0.55,
+      "d": 1.54,
+      "h": 0.85,
+      "material": "marble_white",
+      "has_sink": true,
+      "sink_x": 4.32,
+      "sink_type": "double_cuba"
+    },
+    {
+      "id": "fix_bath_master_toilet",
+      "type": "toilet",
+      "room": "Banho Master",
+      "x": 5.48,
+      "z": 9.6,
+      "w": 0.45,
+      "d": 0.65,
+      "h": 0.8,
+      "material": "ceramic_white",
+      "has_sink": false,
+      "sink_x": null,
+      "sink_type": null
+    },
+    {
+      "id": "fix_bath_master_glass_box",
+      "type": "shower_box",
+      "room": "Banho Master",
+      "x": 4.92,
+      "z": 10.41,
+      "w": 1.75,
+      "d": 0.93,
+      "h": 2.1,
+      "material": "glass_screen",
+      "has_sink": false,
+      "sink_x": null,
+      "sink_type": null
+    },
+    {
+      "id": "fix_bath2_vanity",
+      "type": "vanity",
+      "room": "Banho 2",
+      "x": 6.22,
+      "z": 8.81,
+      "w": 0.55,
+      "d": 0.8,
+      "h": 0.85,
+      "material": "marble_white",
+      "has_sink": true,
+      "sink_x": 6.22,
+      "sink_type": "single_cuba"
+    },
+    {
+      "id": "fix_bath2_toilet",
+      "type": "toilet",
+      "room": "Banho 2",
+      "x": 6.21,
+      "z": 9.6,
+      "w": 0.45,
+      "d": 0.65,
+      "h": 0.8,
+      "material": "ceramic_white",
+      "has_sink": false,
+      "sink_x": null,
+      "sink_type": null
+    },
+    {
+      "id": "fix_bath2_glass_box",
+      "type": "shower_box",
+      "room": "Banho 2",
+      "x": 6.79,
+      "z": 10.41,
+      "w": 0.98,
+      "d": 0.92,
+      "h": 2.1,
+      "material": "glass_screen",
+      "has_sink": false,
+      "sink_x": null,
+      "sink_type": null
+    },
+    {
+      "id": "fix_bath1_vanity",
+      "type": "vanity",
+      "room": "Banho 1",
+      "x": 11.5,
+      "z": 3.48,
+      "w": 1.2,
+      "d": 0.55,
+      "h": 0.85,
+      "material": "marble_white",
+      "has_sink": true,
+      "sink_x": 11.5,
+      "sink_type": "single_cuba"
+    },
+    {
+      "id": "fix_bath1_toilet",
+      "type": "toilet",
+      "room": "Banho 1",
+      "x": 12.4,
+      "z": 4.1,
+      "w": 0.45,
+      "d": 0.65,
+      "h": 0.8,
+      "material": "ceramic_white",
+      "has_sink": false,
+      "sink_x": null,
+      "sink_type": null
+    },
+    {
+      "id": "fix_bath1_glass_box",
+      "type": "shower_box",
+      "room": "Banho 1",
+      "x": 10.6,
+      "z": 4.1,
+      "w": 0.85,
+      "d": 1.2,
+      "h": 2.1,
+      "material": "glass_screen",
+      "has_sink": false,
+      "sink_x": null,
+      "sink_type": null
+    },
+    {
+      "id": "fix_lavabo_vanity",
+      "type": "vanity",
+      "room": "Lavabo",
+      "x": 9.3,
+      "z": 0.84,
+      "w": 0.8,
+      "d": 0.45,
+      "h": 0.85,
+      "material": "marble_white",
+      "has_sink": true,
+      "sink_x": 9.3,
+      "sink_type": "single_cuba"
+    },
+    {
+      "id": "fix_lavabo_toilet",
+      "type": "toilet",
+      "room": "Lavabo",
+      "x": 8.9,
+      "z": 1.4,
+      "w": 0.45,
+      "d": 0.65,
+      "h": 0.8,
+      "material": "ceramic_white",
+      "has_sink": false,
+      "sink_x": null,
+      "sink_type": null
+    },
+    {
+      "id": "fix_ac_condenser_niche",
+      "type": "ac_condenser",
+      "room": "Terraço Técnico (AC)",
+      "x": 11.4,
+      "z": 8.3,
+      "w": 0.9,
+      "d": 0.45,
+      "h": 0.75,
+      "material": "ac_condenser_unit",
+      "has_sink": false,
+      "sink_x": null,
+      "sink_type": null
     }
   ]
 };
+const APARTMENT_DATA = window.APARTMENT_GEOMETRY;
