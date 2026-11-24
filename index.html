@@ -273,6 +273,71 @@
         top: 62px; left: 10px; right: 10px; text-align: center;
       }
     }
+
+    .select-input {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      color: var(--text);
+      padding: 6px 8px;
+      font-size: 11px;
+      outline: none;
+      cursor: pointer;
+    }
+    .select-input option {
+      background: #1c1e24;
+      color: #fff;
+    }
+    .door-hud {
+      position: absolute;
+      bottom: 80px; left: 50%;
+      transform: translateX(-50%);
+      background: rgba(18, 20, 24, 0.90);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      z-index: 100;
+      pointer-events: none;
+      animation: pulseDoor 1.8s infinite;
+    }
+    .door-mobile-btn {
+      position: absolute;
+      bottom: 24px; right: 24px;
+      background: var(--accent);
+      color: #121316;
+      border: 0;
+      padding: 12px 18px;
+      border-radius: 24px;
+      font-size: 13px; font-weight: 800;
+      box-shadow: 0 4px 16px rgba(197, 168, 130, 0.5);
+      z-index: 120;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .door-toast {
+      position: absolute;
+      top: 74px; left: 50%;
+      transform: translateX(-50%);
+      background: rgba(20, 22, 26, 0.92);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 16px;
+      font-size: 12px; font-weight: 600;
+      z-index: 110;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    @keyframes pulseDoor {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.03); }
+    }
   </style>
 </head>
 <body>
@@ -406,6 +471,19 @@
           <span>Rótulos 3D dos Cômodos</span>
           <input id="toggle-labels" type="checkbox" checked onchange="toggleLabels(this.checked)">
         </label>
+
+        <div class="control-row" style="margin-top: 10px;">
+          <div class="control-label">
+            <span>Visão (Pessoa de 1,70 m):</span>
+            <b id="observer-height-label" style="color:var(--accent);">1.60m</b>
+          </div>
+          <select id="observer-height-select" class="select-input" onchange="setObserverHeight(this.value)">
+            <option value="1.60" selected>1,60 m (Pessoa de 1,70 m - Padrão)</option>
+            <option value="1.50">1,50 m (Pessoa de 1,60 m)</option>
+            <option value="1.70">1,70 m (Pessoa de 1,80 m)</option>
+            <option value="1.75">1,75 m (Pessoa de 1,85 m)</option>
+          </select>
+        </div>
       </div>
 
       <!-- Lighting Presets -->
@@ -440,9 +518,21 @@
 
   <!-- Navigation Help HUD (Desktop only) -->
   <div id="navigation-help">
-    <span><b>1ª Pessoa:</b> W, A, S, D para andar | Arraste mouse para olhar | Shift corre</span>
+    <span><b>1ª Pessoa:</b> W, A, S, D para andar | Arraste mouse para olhar | <b>[E]</b> ou Clique para abrir portas | Shift corre</span>
     <span><b>Maquete:</b> Botão esquerdo gira órbita | Roda mouse zoom</span>
   </div>
+
+  <!-- Door Interaction HUD (Desktop & Mobile) -->
+  <div id="door-hud" class="door-hud" style="display:none;">
+    <span class="door-icon">🚪</span>
+    <span id="door-hud-text">[E] ou Clique para Abrir Porta</span>
+  </div>
+
+  <button id="door-mobile-btn" class="door-mobile-btn" style="display:none;" onclick="triggerNearestDoor()">
+    🚪 Abrir Porta
+  </button>
+
+  <div id="door-toast" class="door-toast" style="display:none;"></div>
 
   <!-- 2D Minimap -->
   <div id="minimap-container">
