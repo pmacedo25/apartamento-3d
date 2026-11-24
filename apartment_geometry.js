@@ -124,10 +124,10 @@ const APARTMENT_DATA = {
       "name": "Circula\u00e7\u00e3o \u00cdntima",
       "area": 4.0,
       "box": [
-        7.3,
+        7.76,
         6.77,
         10.45,
-        8.25
+        8.35
       ],
       "spawn": [
         8.8,
@@ -200,8 +200,8 @@ const APARTMENT_DATA = {
       "name": "Su\u00edte 2",
       "area": 8.1,
       "box": [
-        7.3,
-        8.25,
+        7.76,
+        8.35,
         10.25,
         11.0
       ],
@@ -219,13 +219,13 @@ const APARTMENT_DATA = {
       "name": "Banho 2",
       "area": 4.1,
       "box": [
-        5.75,
+        6.34,
         8.35,
-        7.3,
-        11.0
+        7.76,
+        10.9
       ],
       "spawn": [
-        6.5,
+        7.05,
         1.68,
         9.6,
         0.0
@@ -240,7 +240,7 @@ const APARTMENT_DATA = {
       "box": [
         0.94,
         6.77,
-        4.25,
+        4.45,
         10.9
       ],
       "spawn": [
@@ -253,22 +253,41 @@ const APARTMENT_DATA = {
       "color": "#d9ccb6"
     },
     {
-      "id": "banho_master",
-      "name": "Banho Master (Cuba Dupla)",
+      "id": "suite_master_closet",
+      "name": "Closet Su\u00edte Master",
       "area": 3.8,
       "box": [
-        4.25,
+        4.45,
+        6.77,
+        7.76,
+        8.35
+      ],
+      "spawn": [
+        6.1,
+        1.68,
+        7.5,
+        -1.57
+      ],
+      "floor": "wood",
+      "color": "#d9ccb6"
+    },
+    {
+      "id": "banho_master",
+      "name": "Banho Master (Cuba Dupla)",
+      "area": 4.8,
+      "box": [
+        4.45,
         8.35,
-        5.75,
+        6.34,
         10.9
       ],
       "spawn": [
-        5.0,
+        5.39,
         1.68,
         9.6,
         0.0
       ],
-      "floor": "marble",
+      "floor": "tile_light",
       "color": "#dedbd5"
     }
   ],
@@ -440,7 +459,7 @@ const APARTMENT_DATA = {
     },
     {
       "id": "ext_south_suite2",
-      "x1": 7.3,
+      "x1": 7.76,
       "z1": 11.0,
       "x2": 10.25,
       "z2": 11.0,
@@ -450,7 +469,7 @@ const APARTMENT_DATA = {
       "openings": [
         {
           "type": "window",
-          "start": 0.7,
+          "start": 0.5,
           "width": 1.4,
           "sill": 0.9,
           "height": 1.3,
@@ -461,7 +480,7 @@ const APARTMENT_DATA = {
     {
       "id": "ext_east_suite2",
       "x1": 10.25,
-      "z1": 8.25,
+      "z1": 8.35,
       "x2": 10.25,
       "z2": 11.0,
       "thick": 0.18,
@@ -471,28 +490,9 @@ const APARTMENT_DATA = {
     },
     {
       "id": "ext_south_bath2",
-      "x1": 5.75,
-      "z1": 11.0,
-      "x2": 7.3,
-      "z2": 11.0,
-      "thick": 0.18,
-      "height": 2.7,
-      "type": "exterior",
-      "openings": [
-        {
-          "type": "window",
-          "start": 0.4,
-          "width": 0.6,
-          "sill": 1.7,
-          "height": 0.6
-        }
-      ]
-    },
-    {
-      "id": "ext_south_bath_master",
-      "x1": 4.25,
+      "x1": 6.34,
       "z1": 10.9,
-      "x2": 5.75,
+      "x2": 7.76,
       "z2": 10.9,
       "thick": 0.18,
       "height": 2.7,
@@ -503,7 +503,28 @@ const APARTMENT_DATA = {
           "start": 0.4,
           "width": 0.6,
           "sill": 1.7,
-          "height": 0.6
+          "height": 0.6,
+          "label": "Janela Banho 2"
+        }
+      ]
+    },
+    {
+      "id": "ext_south_bath_master",
+      "x1": 4.45,
+      "z1": 10.9,
+      "x2": 6.34,
+      "z2": 10.9,
+      "thick": 0.18,
+      "height": 2.7,
+      "type": "exterior",
+      "openings": [
+        {
+          "type": "window",
+          "start": 0.6,
+          "width": 0.7,
+          "sill": 1.7,
+          "height": 0.6,
+          "label": "Janela Banho Master"
         }
       ]
     },
@@ -511,7 +532,7 @@ const APARTMENT_DATA = {
       "id": "ext_south_suite_master",
       "x1": 0.94,
       "z1": 10.9,
-      "x2": 4.25,
+      "x2": 4.45,
       "z2": 10.9,
       "thick": 0.18,
       "height": 2.7,
@@ -519,7 +540,7 @@ const APARTMENT_DATA = {
       "openings": [
         {
           "type": "window",
-          "start": 0.7,
+          "start": 0.8,
           "width": 1.8,
           "sill": 0.9,
           "height": 1.3,
@@ -583,19 +604,8 @@ const APARTMENT_DATA = {
       "openings": []
     },
     {
-      "id": "int_master_to_terrace",
+      "id": "int_master_to_terrace_and_living",
       "x1": 0.94,
-      "z1": 6.77,
-      "x2": 3.95,
-      "z2": 6.77,
-      "thick": 0.15,
-      "height": 2.7,
-      "type": "interior",
-      "openings": []
-    },
-    {
-      "id": "int_hallway_to_living",
-      "x1": 3.95,
       "z1": 6.77,
       "x2": 7.76,
       "z2": 6.77,
@@ -605,37 +615,18 @@ const APARTMENT_DATA = {
       "openings": []
     },
     {
-      "id": "int_master_to_bath_master",
-      "x1": 4.25,
-      "z1": 8.35,
-      "x2": 4.25,
-      "z2": 10.9,
-      "thick": 0.12,
-      "height": 2.7,
-      "type": "interior",
-      "openings": [
-        {
-          "type": "door",
-          "start": 0.35,
-          "width": 0.7,
-          "height": 2.1,
-          "label": "Banho Master"
-        }
-      ]
-    },
-    {
-      "id": "int_master_corridor_wall",
-      "x1": 3.31,
-      "z1": 8.35,
-      "x2": 5.75,
+      "id": "int_corridor_to_suite_master",
+      "x1": 7.76,
+      "z1": 6.77,
+      "x2": 7.76,
       "z2": 8.35,
-      "thick": 0.12,
+      "thick": 0.14,
       "height": 2.7,
       "type": "interior",
       "openings": [
         {
           "type": "door",
-          "start": 0.15,
+          "start": 0.62,
           "width": 0.8,
           "height": 2.1,
           "label": "Porta Su\u00edte Master"
@@ -643,48 +634,89 @@ const APARTMENT_DATA = {
       ]
     },
     {
-      "id": "int_bath_master_to_bath2",
-      "x1": 5.75,
+      "id": "int_master_to_bath_master_solid",
+      "x1": 4.45,
       "z1": 8.35,
-      "x2": 5.75,
-      "z2": 11.0,
-      "thick": 0.15,
+      "x2": 4.45,
+      "z2": 10.9,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_bath_master_north_wall",
+      "x1": 4.45,
+      "z1": 8.35,
+      "x2": 6.34,
+      "z2": 8.35,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "start": 0.77,
+          "width": 0.7,
+          "height": 2.1,
+          "label": "Porta Banho Master"
+        }
+      ]
+    },
+    {
+      "id": "int_bath_master_to_bath2_solid",
+      "x1": 6.34,
+      "z1": 8.35,
+      "x2": 6.34,
+      "z2": 10.9,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
+      "id": "int_bath2_north_wall_solid",
+      "x1": 6.34,
+      "z1": 8.35,
+      "x2": 7.76,
+      "z2": 8.35,
+      "thick": 0.14,
       "height": 2.7,
       "type": "interior",
       "openings": []
     },
     {
       "id": "int_bath2_to_suite2",
-      "x1": 7.3,
-      "z1": 8.25,
-      "x2": 7.3,
-      "z2": 11.0,
-      "thick": 0.12,
+      "x1": 7.76,
+      "z1": 8.35,
+      "x2": 7.76,
+      "z2": 10.9,
+      "thick": 0.14,
       "height": 2.7,
       "type": "interior",
       "openings": [
         {
           "type": "door",
-          "start": 0.35,
+          "start": 0.13,
           "width": 0.7,
           "height": 2.1,
-          "label": "Banho 2"
+          "label": "Porta Banho 2"
         }
       ]
     },
     {
-      "id": "int_suite2_to_corridor",
-      "x1": 7.3,
-      "z1": 8.25,
+      "id": "int_corridor_to_suite2",
+      "x1": 7.76,
+      "z1": 8.35,
       "x2": 10.25,
-      "z2": 8.25,
-      "thick": 0.12,
+      "z2": 8.35,
+      "thick": 0.14,
       "height": 2.7,
       "type": "interior",
       "openings": [
         {
           "type": "door",
-          "start": 0.5,
+          "start": 0.2,
           "width": 0.8,
           "height": 2.1,
           "label": "Porta Su\u00edte 2"
@@ -725,7 +757,7 @@ const APARTMENT_DATA = {
           "start": 0.6,
           "width": 0.7,
           "height": 2.1,
-          "label": "Banho 1"
+          "label": "Porta Banho 1"
         }
       ]
     },
