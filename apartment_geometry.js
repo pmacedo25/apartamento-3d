@@ -823,21 +823,13 @@ window.APARTMENT_GEOMETRY = {
     {
       "id": "int_bath2_to_suite2",
       "x1": 7.28,
-      "z1": 8.41,
+      "z1": 8.4,
       "x2": 7.28,
       "z2": 10.88,
-      "thick": 0.16,
+      "thick": 0.14,
       "height": 2.7,
       "type": "interior",
-      "openings": [
-        {
-          "type": "door",
-          "start": 0.05,
-          "width": 0.7,
-          "height": 2.1,
-          "label": "Porta Banho 2"
-        }
-      ]
+      "openings": []
     },
     {
       "id": "int_bath2_north_wall",
@@ -845,10 +837,18 @@ window.APARTMENT_GEOMETRY = {
       "z1": 8.4,
       "x2": 7.28,
       "z2": 8.4,
-      "thick": 0.16,
+      "thick": 0.14,
       "height": 2.7,
       "type": "interior",
-      "openings": []
+      "openings": [
+        {
+          "type": "door",
+          "start": 0.78,
+          "width": 0.7,
+          "height": 2.1,
+          "label": "Porta Banho 2"
+        }
+      ]
     },
     {
       "id": "int_bath_master_to_bath2",
@@ -1074,8 +1074,8 @@ window.APARTMENT_GEOMETRY = {
     {
       "id": "S5",
       "name": "Shaft Banho Master",
-      "x": 4.28,
-      "z": 10.46,
+      "x": 4.05,
+      "z": 10.04,
       "w": 0.46,
       "d": 0.84,
       "h": 2.7
@@ -1083,10 +1083,10 @@ window.APARTMENT_GEOMETRY = {
     {
       "id": "S6",
       "name": "Shaft Banho 2",
-      "x": 6.12,
-      "z": 10.41,
-      "w": 0.36,
-      "d": 0.92,
+      "x": 5.94,
+      "z": 10.04,
+      "w": 0.3,
+      "d": 0.84,
       "h": 2.7
     },
     {
@@ -1158,87 +1158,89 @@ window.APARTMENT_GEOMETRY = {
     },
     {
       "id": "fix_bath_master_vanity",
-      "type": "vanity_double",
+      "type": "double_vanity",
       "room": "Banho Master",
-      "x": 4.32,
-      "z": 9.18,
+      "x": 4.05,
+      "z": 8.41,
       "w": 0.55,
       "d": 1.54,
       "h": 0.85,
       "material": "marble_white",
       "has_sink": true,
-      "sink_x": 4.32,
+      "sink_x": 4.05,
       "sink_type": "double_cuba"
     },
     {
       "id": "fix_bath_master_toilet",
       "type": "toilet",
       "room": "Banho Master",
-      "x": 5.48,
-      "z": 9.6,
+      "x": 5.52,
+      "z": 9.2,
       "w": 0.45,
       "d": 0.65,
       "h": 0.8,
       "material": "ceramic_white",
       "has_sink": false,
-      "sink_x": null,
-      "sink_type": null
+      "rotY": -1.5708
     },
     {
       "id": "fix_bath_master_glass_box",
       "type": "shower_box",
       "room": "Banho Master",
-      "x": 4.92,
-      "z": 10.41,
-      "w": 1.75,
+      "x": 4.51,
+      "z": 9.95,
+      "w": 1.29,
       "d": 0.93,
       "h": 2.1,
       "material": "glass_screen",
-      "has_sink": false,
-      "sink_x": null,
-      "sink_type": null
+      "shower_pos": [
+        5.75,
+        2.2,
+        10.4
+      ]
     },
     {
       "id": "fix_bath2_vanity",
       "type": "vanity",
       "room": "Banho 2",
-      "x": 6.22,
-      "z": 8.81,
+      "x": 5.94,
+      "z": 8.41,
       "w": 0.55,
       "d": 0.8,
       "h": 0.85,
       "material": "marble_white",
       "has_sink": true,
-      "sink_x": 6.22,
+      "sink_x": 5.94,
       "sink_type": "single_cuba"
     },
     {
       "id": "fix_bath2_toilet",
       "type": "toilet",
       "room": "Banho 2",
-      "x": 6.21,
-      "z": 9.6,
+      "x": 6.35,
+      "z": 9.5,
       "w": 0.45,
       "d": 0.65,
       "h": 0.8,
       "material": "ceramic_white",
       "has_sink": false,
-      "sink_x": null,
-      "sink_type": null
+      "rotY": 1.5708
     },
     {
       "id": "fix_bath2_glass_box",
       "type": "shower_box",
       "room": "Banho 2",
-      "x": 6.79,
-      "z": 10.41,
-      "w": 0.98,
-      "d": 0.92,
+      "x": 6.24,
+      "z": 9.95,
+      "w": 1.04,
+      "d": 0.93,
       "h": 2.1,
       "material": "glass_screen",
-      "has_sink": false,
-      "sink_x": null,
-      "sink_type": null
+      "shower_pos": [
+        6.0,
+        2.2,
+        10.4
+      ]
     },
     {
       "id": "fix_bath1_vanity",

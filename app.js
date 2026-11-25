@@ -791,16 +791,22 @@ function buildFixtures() {
             ductMesh.position.set(f.w / 2, 1.90 + ductH / 2, f.d / 2);
             grp.add(ductMesh);
 
-        } else if (f.type === 'double_vanity') {
-            // Master Double Vanity
-            const topGeo = new THREE.BoxGeometry(f.w, f.h, f.d);
+        } else if (f.type === 'double_vanity' || f.type === 'vanity_double') {
+            // Master Double Vanity em Mármore Branco com 2 Cubas e Gabinete
+            const topGeo = new THREE.BoxGeometry(f.w, 0.06, f.d);
             const topMesh = new THREE.Mesh(topGeo, marbleLightMat);
-            topMesh.position.set(f.w / 2, f.h / 2, f.d / 2);
+            topMesh.position.set(f.w / 2, f.h - 0.03, f.d / 2);
             grp.add(topMesh);
 
+            const cabGeo = new THREE.BoxGeometry(f.w - 0.04, f.h - 0.09, f.d - 0.04);
+            const cabMat = new THREE.MeshStandardMaterial({ color: 0x32353a, roughness: 0.6 });
+            const cabMesh = new THREE.Mesh(cabGeo, cabMat);
+            cabMesh.position.set(f.w / 2, (f.h - 0.09) / 2, f.d / 2);
+            grp.add(cabMesh);
+
             // Sink 1 & 2
-            const z1 = f.sink_z1 - f.z;
-            const z2 = f.sink_z2 - f.z;
+            const z1 = f.d * 0.25;
+            const z2 = f.d * 0.75;
 
             [z1, z2].forEach(zPos => {
                 const sGeo = new THREE.BoxGeometry(f.w - 0.16, 0.02, 0.38);
@@ -813,36 +819,54 @@ function buildFixtures() {
 
         } else if (f.type === 'vanity') {
             // Single Bathroom Vanity
-            const topGeo = new THREE.BoxGeometry(f.w, f.h, f.d);
+            const isLongZ = f.d > f.w;
+            const topGeo = new THREE.BoxGeometry(f.w, 0.06, f.d);
             const topMesh = new THREE.Mesh(topGeo, marbleLightMat);
-            topMesh.position.set(f.w / 2, f.h / 2, f.d / 2);
+            topMesh.position.set(f.w / 2, f.h - 0.03, f.d / 2);
             grp.add(topMesh);
+
+            const cabGeo = new THREE.BoxGeometry(f.w - 0.04, f.h - 0.09, f.d - 0.04);
+            const cabMat = new THREE.MeshStandardMaterial({ color: 0x32353a, roughness: 0.6 });
+            const cabMesh = new THREE.Mesh(cabGeo, cabMat);
+            cabMesh.position.set(f.w / 2, (f.h - 0.09) / 2, f.d / 2);
+            grp.add(cabMesh);
 
             const sGeo = new THREE.BoxGeometry(Math.min(0.42, f.w - 0.14), 0.02, Math.min(0.38, f.d - 0.14));
             const sMesh = new THREE.Mesh(sGeo, ceramicWhiteMat);
             sMesh.position.set(f.w / 2, f.h + 0.005, f.d / 2);
             grp.add(sMesh);
 
-            buildFaucet(grp, f.w / 2, f.h + 0.01, 0.08);
+            if (isLongZ) {
+                buildFaucet(grp, 0.08, f.h + 0.01, f.d / 2, 'side');
+            } else {
+                buildFaucet(grp, f.w / 2, f.h + 0.01, 0.08);
+            }
 
         } else if (f.type === 'toilet') {
             // Toilet with Flush Tank
+            const subGrp = new THREE.Group();
+
             const bowlGeo = new THREE.BoxGeometry(f.w, 0.42, f.d - 0.20);
             const bowlMesh = new THREE.Mesh(bowlGeo, ceramicWhiteMat);
-            bowlMesh.position.set(f.w / 2, 0.21, f.d / 2 + 0.05);
-            grp.add(bowlMesh);
+            bowlMesh.position.set(0, 0.21, (f.d - 0.20) / 2);
+            subGrp.add(bowlMesh);
 
             const tankGeo = new THREE.BoxGeometry(f.w, 0.38, 0.18);
             const tankMesh = new THREE.Mesh(tankGeo, ceramicWhiteMat);
-            tankMesh.position.set(f.w / 2, 0.58, 0.09);
-            grp.add(tankMesh);
+            tankMesh.position.set(0, 0.58, -0.09);
+            subGrp.add(tankMesh);
 
             const btnGeo = new THREE.CylinderGeometry(0.025, 0.025, 0.015, 16);
             const btnMesh = new THREE.Mesh(btnGeo, chromeMat);
-            btnMesh.position.set(f.w / 2, 0.775, 0.09);
-            grp.add(btnMesh);
+            btnMesh.position.set(0, 0.775, -0.09);
+            subGrp.add(btnMesh);
 
-            if (f.rotY) grp.rotation.y = f.rotY;
+            if (f.rotY) {
+                subGrp.rotation.y = f.rotY;
+            }
+
+            subGrp.position.set(f.w / 2, 0, f.d / 2);
+            grp.add(subGrp);
 
         } else if (f.type === 'shower_box') {
             // Glass Shower Screen
