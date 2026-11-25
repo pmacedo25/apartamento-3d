@@ -285,19 +285,10 @@ window.APARTMENT_GEOMETRY = {
       "z1": 0.44,
       "x2": 3.75,
       "z2": 0.44,
-      "thick": 0.19,
-      "height": 2.7,
-      "type": "exterior",
-      "openings": [
-        {
-          "type": "ventilation",
-          "start": 0.5,
-          "width": 1.2,
-          "sill": 1.6,
-          "height": 0.8,
-          "label": "Ventilação Serviço"
-        }
-      ]
+      "thick": 0.15,
+      "height": 1.2,
+      "type": "railing",
+      "openings": []
     },
     {
       "id": "ext_north_kitchen",

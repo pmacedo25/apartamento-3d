@@ -140,9 +140,10 @@ walls = [
     # =========================================================================
     {
         "id": "ext_north_service",
+        # SACADA / VARANDA DA ÁREA DE SERVIÇO: PARAPEITO / GUARDA-CORPO DE SACADA (idem à sacada gourmet, h = 1.20m, sem janela)
         "x1": 0.95, "z1": 0.44, "x2": 3.75, "z2": 0.44,
-        "thick": 0.19, "height": 2.70, "type": "exterior",
-        "openings": [{"type": "ventilation", "start": 0.50, "width": 1.20, "sill": 1.60, "height": 0.80, "label": "Ventilação Serviço"}]
+        "thick": 0.15, "height": 1.20, "type": "railing",
+        "openings": []
     },
     {
         "id": "ext_north_kitchen",
