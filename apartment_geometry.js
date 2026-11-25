@@ -50,7 +50,7 @@ window.APARTMENT_GEOMETRY = {
       "box": [
         3.75,
         0.44,
-        8.6,
+        8.7,
         2.13
       ],
       "floor": "tile_light",
@@ -102,16 +102,16 @@ window.APARTMENT_GEOMETRY = {
       "name": "Lavabo Social",
       "area": 1.82,
       "box": [
-        8.6,
+        8.7,
         0.44,
         9.95,
-        1.98
+        2.13
       ],
       "floor": "tile_dark",
       "spawn": [
         9.3,
         1.6,
-        1.2,
+        1.3,
         0.0
       ]
     },
@@ -303,7 +303,7 @@ window.APARTMENT_GEOMETRY = {
       "id": "ext_north_kitchen",
       "x1": 3.75,
       "z1": 0.44,
-      "x2": 8.6,
+      "x2": 8.7,
       "z2": 0.44,
       "thick": 0.19,
       "height": 2.7,
@@ -312,7 +312,7 @@ window.APARTMENT_GEOMETRY = {
     },
     {
       "id": "ext_north_lavabo",
-      "x1": 8.6,
+      "x1": 8.7,
       "z1": 0.44,
       "x2": 9.95,
       "z2": 0.44,
@@ -628,7 +628,26 @@ window.APARTMENT_GEOMETRY = {
       "id": "int_kitchen_living_wall",
       "x1": 4.7,
       "z1": 2.13,
-      "x2": 7.61,
+      "x2": 8.7,
+      "z2": 2.13,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": [
+        {
+          "type": "door",
+          "start": 2.95,
+          "width": 0.85,
+          "height": 2.1,
+          "label": "Porta Cozinha / Living"
+        }
+      ]
+    },
+    {
+      "id": "int_lavabo_west_wall",
+      "x1": 8.7,
+      "z1": 0.44,
+      "x2": 8.7,
       "z2": 2.13,
       "thick": 0.14,
       "height": 2.7,
@@ -636,10 +655,10 @@ window.APARTMENT_GEOMETRY = {
       "openings": []
     },
     {
-      "id": "int_lavabo_west_wall",
-      "x1": 8.6,
-      "z1": 0.44,
-      "x2": 8.6,
+      "id": "int_lavabo_south_wall",
+      "x1": 8.7,
+      "z1": 2.13,
+      "x2": 9.95,
       "z2": 2.13,
       "thick": 0.14,
       "height": 2.7,
@@ -647,26 +666,7 @@ window.APARTMENT_GEOMETRY = {
       "openings": [
         {
           "type": "door",
-          "start": 0.75,
-          "width": 0.82,
-          "height": 2.1,
-          "label": "Passagem Cozinha/Living"
-        }
-      ]
-    },
-    {
-      "id": "int_lavabo_south_wall",
-      "x1": 8.6,
-      "z1": 1.98,
-      "x2": 9.95,
-      "z2": 1.98,
-      "thick": 0.14,
-      "height": 2.7,
-      "type": "interior",
-      "openings": [
-        {
-          "type": "door",
-          "start": 0.35,
+          "start": 0.08,
           "width": 0.7,
           "height": 2.1,
           "label": "Porta Lavabo"
@@ -676,7 +676,7 @@ window.APARTMENT_GEOMETRY = {
     {
       "id": "int_hall_living_div",
       "x1": 9.95,
-      "z1": 1.98,
+      "z1": 2.13,
       "x2": 9.95,
       "z2": 3.18,
       "thick": 0.14,
@@ -685,7 +685,7 @@ window.APARTMENT_GEOMETRY = {
       "openings": [
         {
           "type": "door",
-          "start": 0.15,
+          "start": 0.1,
           "width": 0.95,
           "height": 2.1,
           "label": "Porta Entrada Social"
@@ -1286,22 +1286,22 @@ window.APARTMENT_GEOMETRY = {
       "id": "fix_lavabo_vanity",
       "type": "vanity",
       "room": "Lavabo",
-      "x": 9.3,
-      "z": 0.84,
-      "w": 0.8,
-      "d": 0.45,
+      "x": 9.5,
+      "z": 1.35,
+      "w": 0.4,
+      "d": 0.55,
       "h": 0.85,
       "material": "marble_white",
       "has_sink": true,
-      "sink_x": 9.3,
+      "sink_x": 9.5,
       "sink_type": "single_cuba"
     },
     {
       "id": "fix_lavabo_toilet",
       "type": "toilet",
       "room": "Lavabo",
-      "x": 8.9,
-      "z": 1.4,
+      "x": 8.95,
+      "z": 0.8,
       "w": 0.45,
       "d": 0.65,
       "h": 0.8,

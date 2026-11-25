@@ -32,7 +32,7 @@ rooms = [
         "id": "cozinha",
         "name": "Cozinha",
         "area": 8.20,
-        "box": [3.75, 0.44, 8.60, 2.13],
+        "box": [3.75, 0.44, 8.70, 2.13],
         "floor": "tile_light",
         "spawn": [6.10, 1.60, 1.30, 3.14]
     },
@@ -56,9 +56,9 @@ rooms = [
         "id": "lavabo",
         "name": "Lavabo Social",
         "area": 1.82,
-        "box": [8.60, 0.44, 9.95, 1.98],
+        "box": [8.70, 0.44, 9.95, 2.13],
         "floor": "tile_dark",
-        "spawn": [9.30, 1.60, 1.20, 0.0]
+        "spawn": [9.30, 1.60, 1.30, 0.0]
     },
     {
         "id": "circulacao",
@@ -146,13 +146,13 @@ walls = [
     },
     {
         "id": "ext_north_kitchen",
-        "x1": 3.75, "z1": 0.44, "x2": 8.60, "z2": 0.44,
+        "x1": 3.75, "z1": 0.44, "x2": 8.70, "z2": 0.44,
         "thick": 0.19, "height": 2.70, "type": "exterior",
         "openings": []
     },
     {
         "id": "ext_north_lavabo",
-        "x1": 8.60, "z1": 0.44, "x2": 9.95, "z2": 0.44,
+        "x1": 8.70, "z1": 0.44, "x2": 9.95, "z2": 0.44,
         "thick": 0.19, "height": 2.70, "type": "exterior",
         "openings": []
     },
@@ -313,17 +313,17 @@ walls = [
     },
     {
         "id": "int_kitchen_living_wall",
-        "x1": 4.70, "z1": 2.13, "x2": 7.61, "z2": 2.13,
+        "x1": 4.70, "z1": 2.13, "x2": 8.70, "z2": 2.13,
         "thick": 0.14, "height": 2.70, "type": "interior",
-        "openings": []
+        "openings": [
+            {"type": "door", "start": 2.95, "width": 0.85, "height": 2.10, "label": "Porta Cozinha / Living"}
+        ]
     },
     {
         "id": "int_lavabo_west_wall",
-        "x1": 8.60, "z1": 0.44, "x2": 8.60, "z2": 2.13,
+        "x1": 8.70, "z1": 0.44, "x2": 8.70, "z2": 2.13,
         "thick": 0.14, "height": 2.70, "type": "interior",
-        "openings": [
-            {"type": "door", "start": 0.75, "width": 0.82, "height": 2.10, "label": "Passagem Cozinha/Living"}
-        ]
+        "openings": []
     },
 
     # =========================================================================
@@ -331,18 +331,18 @@ walls = [
     # =========================================================================
     {
         "id": "int_lavabo_south_wall",
-        "x1": 8.60, "z1": 1.98, "x2": 9.95, "z2": 1.98,
+        "x1": 8.70, "z1": 2.13, "x2": 9.95, "z2": 2.13,
         "thick": 0.14, "height": 2.70, "type": "interior",
         "openings": [
-            {"type": "door", "start": 0.35, "width": 0.70, "height": 2.10, "label": "Porta Lavabo"}
+            {"type": "door", "start": 0.08, "width": 0.70, "height": 2.10, "label": "Porta Lavabo"}
         ]
     },
     {
         "id": "int_hall_living_div",
-        "x1": 9.95, "z1": 1.98, "x2": 9.95, "z2": 3.18,
+        "x1": 9.95, "z1": 2.13, "x2": 9.95, "z2": 3.18,
         "thick": 0.14, "height": 2.70, "type": "interior",
         "openings": [
-            {"type": "door", "start": 0.15, "width": 0.95, "height": 2.10, "label": "Porta Entrada Social"}
+            {"type": "door", "start": 0.10, "width": 0.95, "height": 2.10, "label": "Porta Entrada Social"}
         ]
     },
 
@@ -535,8 +535,8 @@ fixtures = [
     {"id": "fix_bath1_glass_box", "type": "shower_box", "room": "Banho 1", "x": 10.60, "z": 4.10, "w": 0.85, "d": 1.20, "h": 2.10, "material": "glass_screen", "has_sink": False, "sink_x": None, "sink_type": None},
 
     # Lavabo
-    {"id": "fix_lavabo_vanity", "type": "vanity", "room": "Lavabo", "x": 9.30, "z": 0.84, "w": 0.80, "d": 0.45, "h": 0.85, "material": "marble_white", "has_sink": True, "sink_x": 9.30, "sink_type": "single_cuba"},
-    {"id": "fix_lavabo_toilet", "type": "toilet", "room": "Lavabo", "x": 8.90, "z": 1.40, "w": 0.45, "d": 0.65, "h": 0.80, "material": "ceramic_white", "has_sink": False, "sink_x": None, "sink_type": None},
+    {"id": "fix_lavabo_vanity", "type": "vanity", "room": "Lavabo", "x": 9.50, "z": 1.35, "w": 0.40, "d": 0.55, "h": 0.85, "material": "marble_white", "has_sink": True, "sink_x": 9.50, "sink_type": "single_cuba"},
+    {"id": "fix_lavabo_toilet", "type": "toilet", "room": "Lavabo", "x": 8.95, "z": 0.80, "w": 0.45, "d": 0.65, "h": 0.80, "material": "ceramic_white", "has_sink": False, "sink_x": None, "sink_type": None},
 
     # Terraço Técnico (Condensadoras AC)
     {"id": "fix_ac_condenser_niche", "type": "ac_condenser", "room": "Terraço Técnico (AC)", "x": 11.40, "z": 8.30, "w": 0.90, "d": 0.45, "h": 0.75, "material": "ac_condenser_unit", "has_sink": False, "sink_x": None, "sink_type": None}
