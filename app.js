@@ -536,7 +536,7 @@ function buildWalls() {
             return;
         }
 
-        if (w.type === 'sliding_glass_wall') {
+        if (w.type === 'sliding_glass_wall' || w.type === 'glass_slider') {
             buildSlidingGlassWall(wallObj, len, wallHeight, thick);
             wallsGroup.add(wallObj);
             return;
@@ -724,26 +724,72 @@ function buildFixtures() {
 
             buildFaucet(grp, f.w / 2, f.h + 0.01, 0.08);
 
-        } else if (f.type === 'gourmet_counter') {
-            // Barbecue Countertop
-            const topGeo = new THREE.BoxGeometry(f.w, f.h, f.d);
+        } else if (f.type === 'gourmet_counter' || (f.type === 'countertop' && f.room === 'Terraço Gourmet')) {
+            // Bancada Gourmet em Granito Preto (Cuba redonda prep + torneira gourmet + cuba retangular inox)
+            const topGeo = new THREE.BoxGeometry(f.w, 0.06, f.d);
             const topMesh = new THREE.Mesh(topGeo, graniteBlackMat);
-            topMesh.position.set(f.w / 2, f.h / 2, f.d / 2);
+            topMesh.position.set(f.w / 2, f.h - 0.03, f.d / 2);
             grp.add(topMesh);
 
-            // Round sink
-            const sinkGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.02, 24);
-            const sinkMesh = new THREE.Mesh(sinkGeo, steelSinkMat);
-            sinkMesh.position.set(0.35, f.h + 0.005, f.d / 2);
-            grp.add(sinkMesh);
-            buildFaucet(grp, 0.35, f.h + 0.01, f.d / 2 - 0.14);
+            // Gabinete inferior da bancada em acabamento grafite
+            const cabGeo = new THREE.BoxGeometry(f.w - 0.04, f.h - 0.09, f.d - 0.04);
+            const cabMat = new THREE.MeshStandardMaterial({ color: 0x222428, roughness: 0.6 });
+            const cabMesh = new THREE.Mesh(cabGeo, cabMat);
+            cabMesh.position.set(f.w / 2, (f.h - 0.09) / 2, f.d / 2);
+            grp.add(cabMesh);
 
-            // Barbecue grill niche
-            const bbqGeo = new THREE.BoxGeometry(f.bbq_w || 0.45, 0.04, f.d - 0.12);
-            const bbqMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.8 });
-            const bbqMesh = new THREE.Mesh(bbqGeo, bbqMat);
-            bbqMesh.position.set(f.w - (f.bbq_w || 0.45) / 2 - 0.08, f.h + 0.01, f.d / 2);
-            grp.add(bbqMesh);
+            // 1. Cuba Redonda Inox de Apoio / Prep
+            const roundSinkX = f.sink_x ? (f.sink_x - f.x) : 0.40;
+            const roundSinkGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.02, 24);
+            const roundSinkMesh = new THREE.Mesh(roundSinkGeo, steelSinkMat);
+            roundSinkMesh.position.set(roundSinkX, f.h + 0.005, f.d / 2);
+            grp.add(roundSinkMesh);
+
+            // Torneira Gourmet Alta Cromada sobre a cuba redonda
+            buildFaucet(grp, roundSinkX, f.h + 0.01, f.d / 2 - 0.16);
+
+            // 2. Cuba Retangular Inox / Calha Úmida
+            const rectSinkX = Math.min(f.w - 0.40, roundSinkX + 0.60);
+            const rectSinkGeo = new THREE.BoxGeometry(0.52, 0.02, 0.38);
+            const rectSinkMesh = new THREE.Mesh(rectSinkGeo, steelSinkMat);
+            rectSinkMesh.position.set(rectSinkX, f.h + 0.005, f.d / 2);
+            grp.add(rectSinkMesh);
+
+        } else if (f.type === 'barbecue' || f.type === 'gourmet_bbq') {
+            // Churrasqueira Gourmet com base em alvenaria/granito, nicho refratário, grelha inox, coifa e chaminé até o teto
+            // 1. Base em Alvenaria / Granito
+            const baseGeo = new THREE.BoxGeometry(f.w, 0.90, f.d);
+            const baseMesh = new THREE.Mesh(baseGeo, graniteBlackMat);
+            baseMesh.position.set(f.w / 2, 0.45, f.d / 2);
+            grp.add(baseMesh);
+
+            // 2. Nicho Refratário da Churrasqueira
+            const boxGeo = new THREE.BoxGeometry(f.w - 0.14, 0.55, f.d - 0.10);
+            const boxMat = new THREE.MeshStandardMaterial({ color: 0x141517, roughness: 0.9 });
+            const boxMesh = new THREE.Mesh(boxGeo, boxMat);
+            boxMesh.position.set(f.w / 2, 0.90 + 0.275, f.d / 2);
+            grp.add(boxMesh);
+
+            // 3. Grelha Inox de Parrilla / Queimador
+            const grillGeo = new THREE.BoxGeometry(f.w - 0.22, 0.02, f.d - 0.16);
+            const grillMesh = new THREE.Mesh(grillGeo, steelSinkMat);
+            grillMesh.position.set(f.w / 2, 0.92, f.d / 2);
+            grp.add(grillMesh);
+
+            // 4. Coifa Piramidal (Exhaust Hood)
+            const hoodGeo = new THREE.CylinderGeometry(f.w * 0.30, f.w * 0.50, 0.45, 4);
+            const hoodMat = new THREE.MeshStandardMaterial({ color: 0x1c1e22, metalness: 0.7, roughness: 0.35 });
+            const hoodMesh = new THREE.Mesh(hoodGeo, hoodMat);
+            hoodMesh.position.set(f.w / 2, 1.45 + 0.225, f.d / 2);
+            hoodMesh.rotation.y = Math.PI / 4;
+            grp.add(hoodMesh);
+
+            // 5. Duto de Fumaça / Chaminé até o teto (2.70m)
+            const ductH = 2.70 - 1.90;
+            const ductGeo = new THREE.BoxGeometry(f.w * 0.50, ductH, f.d * 0.65);
+            const ductMesh = new THREE.Mesh(ductGeo, shaftMaterial);
+            ductMesh.position.set(f.w / 2, 1.90 + ductH / 2, f.d / 2);
+            grp.add(ductMesh);
 
         } else if (f.type === 'double_vanity') {
             // Master Double Vanity
@@ -878,6 +924,7 @@ function buildSlidingGlassWall(group, len, h, thick) {
     const doorH = 2.45;
     const lintelH = h - doorH;
 
+    // Viga / Bandeira superior de alvenaria
     if (lintelH > 0.02) {
         const topGeo = new THREE.BoxGeometry(len, lintelH, thick);
         const topMesh = new THREE.Mesh(topGeo, wallMaterial);
@@ -885,20 +932,79 @@ function buildSlidingGlassWall(group, len, h, thick) {
         group.add(topMesh);
     }
 
-    const panelW = len / 4;
-    for (let i = 0; i < 4; i++) {
-        const px = panelW * i + panelW / 2;
-        const pz = (i % 2 === 0 ? 0.03 : -0.03);
+    // Trilho superior e inferior de alumínio
+    const trackGeo = new THREE.BoxGeometry(len, 0.03, thick);
+    const bottomTrack = new THREE.Mesh(trackGeo, frameMaterial);
+    bottomTrack.position.set(len / 2, 0.015, 0);
+    group.add(bottomTrack);
 
-        const fGeo = new THREE.BoxGeometry(panelW - 0.04, doorH, 0.04);
-        const gGeo = new THREE.BoxGeometry(panelW - 0.12, doorH - 0.12, 0.015);
+    const topTrack = new THREE.Mesh(trackGeo, frameMaterial);
+    topTrack.position.set(len / 2, doorH - 0.015, 0);
+    group.add(topTrack);
+
+    // Montantes laterais do vão
+    const jambGeo = new THREE.BoxGeometry(0.04, doorH, thick);
+    const leftJamb = new THREE.Mesh(jambGeo, frameMaterial);
+    leftJamb.position.set(0.02, doorH / 2, 0);
+    group.add(leftJamb);
+
+    const rightJamb = new THREE.Mesh(jambGeo, frameMaterial);
+    rightJamb.position.set(len - 0.02, doorH / 2, 0);
+    group.add(rightJamb);
+
+    // 3 Folhas Telescópicas de Correr (Sobreposição e 3 trilhos paralelos)
+    const numPanels = 3;
+    const overlap = 0.08;
+    const panelW = (len - 0.08 + overlap * (numPanels - 1)) / numPanels;
+    const sashThick = 0.045;
+    const frameDepth = 0.035;
+
+    for (let i = 0; i < numPanels; i++) {
+        const px = 0.04 + i * (panelW - overlap) + panelW / 2;
+        const pz = (i - 1) * 0.032;
+
+        const panelGrp = new THREE.Group();
+        panelGrp.position.set(px, 0, pz);
+
+        // Perfil superior da folha
+        const topSashGeo = new THREE.BoxGeometry(panelW, sashThick, frameDepth);
+        const topSash = new THREE.Mesh(topSashGeo, frameMaterial);
+        topSash.position.set(0, doorH - sashThick / 2 - 0.03, 0);
+        panelGrp.add(topSash);
+
+        // Perfil inferior da folha
+        const botSashGeo = new THREE.BoxGeometry(panelW, sashThick * 1.5, frameDepth);
+        const botSash = new THREE.Mesh(botSashGeo, frameMaterial);
+        botSash.position.set(0, 0.03 + (sashThick * 1.5) / 2, 0);
+        panelGrp.add(botSash);
+
+        // Montante esquerdo da folha
+        const glassH = doorH - 0.06 - sashThick * 2.5;
+        const leftSashGeo = new THREE.BoxGeometry(sashThick, glassH, frameDepth);
+        const leftSash = new THREE.Mesh(leftSashGeo, frameMaterial);
+        leftSash.position.set(-panelW / 2 + sashThick / 2, doorH / 2, 0);
+        panelGrp.add(leftSash);
+
+        // Montante direito da folha
+        const rightSashGeo = new THREE.BoxGeometry(sashThick, glassH, frameDepth);
+        const rightSash = new THREE.Mesh(rightSashGeo, frameMaterial);
+        rightSash.position.set(panelW / 2 - sashThick / 2, doorH / 2, 0);
+        panelGrp.add(rightSash);
+
+        // Painel de vidro temperado translúcido e limpo
+        const gGeo = new THREE.BoxGeometry(panelW - sashThick * 2, glassH, 0.012);
         const gMesh = new THREE.Mesh(gGeo, glassMaterial);
-        gMesh.position.set(px, doorH / 2, pz);
-        group.add(gMesh);
+        gMesh.position.set(0, doorH / 2, 0);
+        panelGrp.add(gMesh);
 
-        const frameMesh = new THREE.Mesh(fGeo, frameMaterial);
-        frameMesh.position.set(px, doorH / 2, pz);
-        group.add(frameMesh);
+        // Puxador vertical em inox/alumínio
+        const handleGeo = new THREE.BoxGeometry(0.02, 0.45, 0.045);
+        const handleMesh = new THREE.Mesh(handleGeo, chromeMat);
+        const hx = (i === 0) ? (panelW / 2 - sashThick - 0.02) : (-panelW / 2 + sashThick + 0.02);
+        handleMesh.position.set(hx, 1.05, 0);
+        panelGrp.add(handleMesh);
+
+        group.add(panelGrp);
     }
 }
 

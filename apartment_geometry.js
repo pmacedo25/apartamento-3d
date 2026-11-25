@@ -28,7 +28,7 @@ window.APARTMENT_GEOMETRY = {
     {
       "id": "terraco",
       "name": "Terraço Gourmet",
-      "area": 19.65,
+      "area": 16.0,
       "box": [
         0.4,
         2.18,
@@ -40,7 +40,7 @@ window.APARTMENT_GEOMETRY = {
         2.5,
         1.6,
         4.5,
-        1.57
+        0.0
       ]
     },
     {
@@ -607,7 +607,7 @@ window.APARTMENT_GEOMETRY = {
     },
     {
       "id": "int_kitchen_terrace_wall",
-      "x1": 3.75,
+      "x1": 3.65,
       "z1": 2.18,
       "x2": 4.7,
       "z2": 2.18,
@@ -617,10 +617,10 @@ window.APARTMENT_GEOMETRY = {
       "openings": [
         {
           "type": "door",
-          "start": 0.15,
-          "width": 0.8,
+          "start": 0.1,
+          "width": 0.85,
           "height": 2.1,
-          "label": "Acesso Cozinha/Terraço"
+          "label": "Porta Acesso Cozinha / Terraço"
         }
       ]
     },
@@ -700,13 +700,13 @@ window.APARTMENT_GEOMETRY = {
       "z2": 6.75,
       "thick": 0.1,
       "height": 2.7,
-      "type": "glass_slider",
+      "type": "sliding_glass_wall",
       "openings": [
         {
           "type": "sliding_door",
-          "start": 0.3,
-          "width": 3.9,
-          "height": 2.4,
+          "start": 0.4,
+          "width": 3.7,
+          "height": 2.45,
           "label": "Esquadria Living/Terraço (3 Folhas Telescópicas)"
         }
       ]
@@ -946,10 +946,10 @@ window.APARTMENT_GEOMETRY = {
     {
       "id": "P2",
       "name": "Pilar Divisa Cozinha/Terraço",
-      "x": 3.75,
+      "x": 3.35,
       "z": 2.18,
-      "w": 0.25,
-      "d": 0.55,
+      "w": 0.3,
+      "d": 0.6,
       "h": 2.7
     },
     {
@@ -1038,10 +1038,10 @@ window.APARTMENT_GEOMETRY = {
     {
       "id": "S1",
       "name": "Shaft Duto Churrasqueira Gourmet",
-      "x": 1.25,
-      "z": 2.45,
+      "x": 2.7,
+      "z": 2.25,
       "w": 0.45,
-      "d": 0.45,
+      "d": 0.4,
       "h": 2.7
     },
     {
@@ -1130,26 +1130,26 @@ window.APARTMENT_GEOMETRY = {
     },
     {
       "id": "fix_gourmet_counter",
-      "type": "countertop",
+      "type": "gourmet_counter",
       "room": "Terraço Gourmet",
-      "x": 2.2,
-      "z": 2.45,
-      "w": 1.8,
-      "d": 0.65,
+      "x": 0.95,
+      "z": 2.18,
+      "w": 1.45,
+      "d": 0.6,
       "h": 0.9,
       "material": "granite_black",
       "has_sink": true,
-      "sink_x": 2.6,
+      "sink_x": 1.35,
       "sink_type": "round_prep"
     },
     {
       "id": "fix_gourmet_bbq",
       "type": "barbecue",
       "room": "Terraço Gourmet",
-      "x": 1.6,
-      "z": 2.45,
-      "w": 0.8,
-      "d": 0.65,
+      "x": 2.4,
+      "z": 2.18,
+      "w": 0.95,
+      "d": 0.6,
       "h": 1.1,
       "material": "masonry_dark",
       "has_sink": false,

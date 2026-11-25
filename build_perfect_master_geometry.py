@@ -23,10 +23,10 @@ rooms = [
     {
         "id": "terraco",
         "name": "Terraço Gourmet",
-        "area": 19.65,
+        "area": 16.00,
         "box": [0.40, 2.18, 4.70, 6.75],
         "floor": "deck_or_tile",
-        "spawn": [2.50, 1.60, 4.50, 1.57]
+        "spawn": [2.50, 1.60, 4.50, 0.0]
     },
     {
         "id": "cozinha",
@@ -305,10 +305,10 @@ walls = [
     },
     {
         "id": "int_kitchen_terrace_wall",
-        "x1": 3.75, "z1": 2.18, "x2": 4.70, "z2": 2.18,
+        "x1": 3.65, "z1": 2.18, "x2": 4.70, "z2": 2.18,
         "thick": 0.15, "height": 2.70, "type": "interior",
         "openings": [
-            {"type": "door", "start": 0.15, "width": 0.80, "height": 2.10, "label": "Acesso Cozinha/Terraço"}
+            {"type": "door", "start": 0.10, "width": 0.85, "height": 2.10, "label": "Porta Acesso Cozinha / Terraço"}
         ]
     },
     {
@@ -352,9 +352,9 @@ walls = [
     {
         "id": "esquadria_living_terraco",
         "x1": 4.70, "z1": 2.18, "x2": 4.70, "z2": 6.75,
-        "thick": 0.10, "height": 2.70, "type": "glass_slider",
+        "thick": 0.10, "height": 2.70, "type": "sliding_glass_wall",
         "openings": [
-            {"type": "sliding_door", "start": 0.30, "width": 3.90, "height": 2.40, "label": "Esquadria Living/Terraço (3 Folhas Telescópicas)"}
+            {"type": "sliding_door", "start": 0.40, "width": 3.70, "height": 2.45, "label": "Esquadria Living/Terraço (3 Folhas Telescópicas)"}
         ]
     },
 
@@ -486,7 +486,7 @@ walls = [
 # 11 PILARES DE CONCRETO (Extraídos diretamente do CAD executivo)
 pillars = [
     {"id": "P1", "name": "Pilar Varanda Noroeste", "x": 0.40, "z": 2.18, "w": 0.25, "d": 0.60, "h": 2.70},
-    {"id": "P2", "name": "Pilar Divisa Cozinha/Terraço", "x": 3.75, "z": 2.18, "w": 0.25, "d": 0.55, "h": 2.70},
+    {"id": "P2", "name": "Pilar Divisa Cozinha/Terraço", "x": 3.35, "z": 2.18, "w": 0.30, "d": 0.60, "h": 2.70},
     {"id": "P3", "name": "Pilar Varanda Sudoeste / Master", "x": 0.40, "z": 6.75, "w": 0.25, "d": 0.60, "h": 2.70},
     {"id": "P4", "name": "Pilar Terraço / Living / Closet", "x": 4.70, "z": 6.75, "w": 0.25, "d": 0.70, "h": 2.70},
     {"id": "P5", "name": "Pilar Hall / Lavabo", "x": 9.95, "z": 1.01, "w": 0.30, "d": 0.50, "h": 2.70},
@@ -500,7 +500,7 @@ pillars = [
 
 # 7 SHAFTS HIDRÁULICOS E DE VENTILAÇÃO
 shafts = [
-    {"id": "S1", "name": "Shaft Duto Churrasqueira Gourmet", "x": 1.25, "z": 2.45, "w": 0.45, "d": 0.45, "h": 2.70},
+    {"id": "S1", "name": "Shaft Duto Churrasqueira Gourmet", "x": 2.70, "z": 2.25, "w": 0.45, "d": 0.40, "h": 2.70},
     {"id": "S2", "name": "Shaft Cozinha / Prumada Norte", "x": 5.40, "z": 0.60, "w": 0.40, "d": 0.30, "h": 2.70},
     {"id": "S3", "name": "Shaft Hidráulico Lavabo", "x": 9.75, "z": 0.60, "w": 0.35, "d": 0.30, "h": 2.70},
     {"id": "S4", "name": "Shaft Banho 1", "x": 12.60, "z": 3.40, "w": 0.45, "d": 0.40, "h": 2.70},
@@ -516,8 +516,8 @@ fixtures = [
     # Área de Serviço
     {"id": "fix_service_tub", "type": "laundry_tub", "room": "Área de Serviço", "x": 3.13, "z": 0.68, "w": 0.56, "d": 0.40, "h": 0.85, "material": "ceramic_white", "has_sink": True, "sink_x": 3.13, "sink_type": "laundry"},
     # Terraço Gourmet
-    {"id": "fix_gourmet_counter", "type": "countertop", "room": "Terraço Gourmet", "x": 2.20, "z": 2.45, "w": 1.80, "d": 0.65, "h": 0.90, "material": "granite_black", "has_sink": True, "sink_x": 2.60, "sink_type": "round_prep"},
-    {"id": "fix_gourmet_bbq", "type": "barbecue", "room": "Terraço Gourmet", "x": 1.60, "z": 2.45, "w": 0.80, "d": 0.65, "h": 1.10, "material": "masonry_dark", "has_sink": False, "sink_x": None, "sink_type": None},
+    {"id": "fix_gourmet_counter", "type": "gourmet_counter", "room": "Terraço Gourmet", "x": 0.95, "z": 2.18, "w": 1.45, "d": 0.60, "h": 0.90, "material": "granite_black", "has_sink": True, "sink_x": 1.35, "sink_type": "round_prep"},
+    {"id": "fix_gourmet_bbq", "type": "barbecue", "room": "Terraço Gourmet", "x": 2.40, "z": 2.18, "w": 0.95, "d": 0.60, "h": 1.10, "material": "masonry_dark", "has_sink": False, "sink_x": None, "sink_type": None},
     
     # Banho Master: BANCADA EM PEDRA COM CUBA DUPLA!
     {"id": "fix_bath_master_vanity", "type": "vanity_double", "room": "Banho Master", "x": 4.32, "z": 9.18, "w": 0.55, "d": 1.54, "h": 0.85, "material": "marble_white", "has_sink": True, "sink_x": 4.32, "sink_type": "double_cuba"},
