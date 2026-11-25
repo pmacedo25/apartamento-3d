@@ -2379,12 +2379,12 @@
       "type": "exterior",
       "openings": [
         {
-          "type": "sliding_window",
-          "start": 0.4,
-          "width": 1.8,
-          "sill": 0.85,
-          "height": 1.4,
-          "label": "Janela Suíte 1 (Varanda Técnica)"
+          "type": "sliding_door_2f",
+          "start": 0.35,
+          "width": 2.0,
+          "height": 2.45,
+          "sill": 0.05,
+          "label": "Porta de Correr Suíte 1 / Varanda Técnica"
         }
       ]
     },
@@ -3101,9 +3101,11 @@ function init() {
 
         // Camera
         camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.08, 150);
+        window.camera = camera;
 
         // WebGL Renderer
         renderer = createSafeRenderer(container);
+        window.renderer = renderer;
 
         // Orbit Controls
         if (typeof THREE.OrbitControls === 'function') {
@@ -3117,6 +3119,7 @@ function init() {
                 ONE: THREE.TOUCH.ROTATE,
                 TWO: THREE.TOUCH.DOLLY_PAN
             };
+            window.orbitControls = orbitControls;
         }
 
         // Groups
@@ -3477,7 +3480,7 @@ function buildWalls() {
         }
 
         if (w.type === 'sliding_glass_wall' || w.type === 'glass_slider') {
-            buildSlidingGlassWall(wallObj, len, wallHeight, thick);
+            buildSlidingGlassWall(wallObj, len, wallHeight, thick, w);
             wallsGroup.add(wallObj);
             return;
         }
@@ -3554,6 +3557,29 @@ function buildWalls() {
                     }
 
                     buildWindowFrameAndGlass(wallObj, opStart, opW, sill, wh, thick);
+                } else if (op.type === 'sliding_door_2f' || op.type === 'sliding_door') {
+                    const sill = op.sill || 0.04;
+                    const dh = op.height || 2.45;
+
+                    // Soleira / peitoril baixo se houver
+                    if (sill > 0.005) {
+                        const sillGeo = new THREE.BoxGeometry(opW, sill, thick);
+                        const sillMesh = new THREE.Mesh(sillGeo, frameMaterial);
+                        sillMesh.position.set(opStart + opW / 2, sill / 2, 0);
+                        wallObj.add(sillMesh);
+                    }
+
+                    // Bandeira / lintel superior
+                    const topY = sill + dh;
+                    const lintelH = wallHeight - topY;
+                    if (lintelH > 0.02) {
+                        const lintelGeo = new THREE.BoxGeometry(opW, lintelH, thick);
+                        const lintelMesh = new THREE.Mesh(lintelGeo, wallMaterial);
+                        lintelMesh.position.set(opStart + opW / 2, topY + lintelH / 2, 0);
+                        wallObj.add(lintelMesh);
+                    }
+
+                    buildSlidingDoor2Leaves(wallObj, opStart, opW, sill, dh, thick, op);
                 }
 
                 currentX = opEnd;
@@ -3884,7 +3910,7 @@ function buildBalconyRailing(group, len, h, thick) {
     }
 }
 
-function buildSlidingGlassWall(group, len, h, thick) {
+function buildSlidingGlassWall(group, len, h, thick, wallData) {
     const doorH = 2.45;
     const lintelH = h - doorH;
 
@@ -3896,24 +3922,24 @@ function buildSlidingGlassWall(group, len, h, thick) {
         group.add(topMesh);
     }
 
-    // Trilho superior e inferior de alumínio
-    const trackGeo = new THREE.BoxGeometry(len, 0.03, thick);
+    // Trilho superior e inferior de alumínio (sistema de 3 pistas)
+    const trackGeo = new THREE.BoxGeometry(len, 0.035, thick);
     const bottomTrack = new THREE.Mesh(trackGeo, frameMaterial);
-    bottomTrack.position.set(len / 2, 0.015, 0);
+    bottomTrack.position.set(len / 2, 0.017, 0);
     group.add(bottomTrack);
 
     const topTrack = new THREE.Mesh(trackGeo, frameMaterial);
-    topTrack.position.set(len / 2, doorH - 0.015, 0);
+    topTrack.position.set(len / 2, doorH - 0.017, 0);
     group.add(topTrack);
 
     // Montantes laterais do vão
-    const jambGeo = new THREE.BoxGeometry(0.04, doorH, thick);
+    const jambGeo = new THREE.BoxGeometry(0.045, doorH, thick);
     const leftJamb = new THREE.Mesh(jambGeo, frameMaterial);
-    leftJamb.position.set(0.02, doorH / 2, 0);
+    leftJamb.position.set(0.0225, doorH / 2, 0);
     group.add(leftJamb);
 
     const rightJamb = new THREE.Mesh(jambGeo, frameMaterial);
-    rightJamb.position.set(len - 0.02, doorH / 2, 0);
+    rightJamb.position.set(len - 0.0225, doorH / 2, 0);
     group.add(rightJamb);
 
     // 3 Folhas Telescópicas de Correr (Sobreposição e 3 trilhos paralelos)
@@ -3923,12 +3949,15 @@ function buildSlidingGlassWall(group, len, h, thick) {
     const sashThick = 0.045;
     const frameDepth = 0.035;
 
+    // Panel sliding tracking
+    const slidingPanels = [];
+
     for (let i = 0; i < numPanels; i++) {
-        const px = 0.04 + i * (panelW - overlap) + panelW / 2;
+        const basePx = 0.04 + i * (panelW - overlap) + panelW / 2;
         const pz = (i - 1) * 0.032;
 
         const panelGrp = new THREE.Group();
-        panelGrp.position.set(px, 0, pz);
+        panelGrp.position.set(basePx, 0, pz);
 
         // Perfil superior da folha
         const topSashGeo = new THREE.BoxGeometry(panelW, sashThick, frameDepth);
@@ -3961,15 +3990,184 @@ function buildSlidingGlassWall(group, len, h, thick) {
         gMesh.position.set(0, doorH / 2, 0);
         panelGrp.add(gMesh);
 
-        // Puxador vertical em inox/alumínio
-        const handleGeo = new THREE.BoxGeometry(0.02, 0.45, 0.045);
+        // Puxador vertical em inox/alumínio tubular
+        const handleGeo = new THREE.BoxGeometry(0.025, 0.50, 0.045);
         const handleMesh = new THREE.Mesh(handleGeo, chromeMat);
         const hx = (i === 0) ? (panelW / 2 - sashThick - 0.02) : (-panelW / 2 + sashThick + 0.02);
         handleMesh.position.set(hx, 1.05, 0);
         panelGrp.add(handleMesh);
 
+        // Hitbox invisível para clique e abertura
+        const hitGeo = new THREE.BoxGeometry(panelW, doorH, 0.12);
+        const hitMat = new THREE.MeshBasicMaterial({ visible: false });
+        const hitMesh = new THREE.Mesh(hitGeo, hitMat);
+        hitMesh.position.set(0, doorH / 2, 0);
+        panelGrp.add(hitMesh);
+
         group.add(panelGrp);
+
+        // Folhas móveis (folhas 1 e 2 recolhem para trás da folha fixa 0)
+        // Telescopic slide: panel 2 slides max distance, panel 1 slides half distance
+        const slideOffset = (i === 0) ? 0 : (i === 1 ? -(panelW - overlap) * 0.95 : -(panelW - overlap) * 1.90);
+        slidingPanels.push({
+            group: panelGrp,
+            baseX: basePx,
+            slideOffset: slideOffset,
+            currentX: basePx,
+            targetX: basePx,
+            hitMesh: hitMesh,
+            handleMesh: handleMesh,
+            gMesh: gMesh
+        });
     }
+
+    // Registrar esquadria como porta de correr telescópica interativa
+    const sliderData = {
+        id: (wallData && wallData.id) || 'esquadria_living_terraco',
+        label: 'Porta de Correr Varanda Gourmet (3 Folhas)',
+        type: 'sliding_telescopic',
+        group: group,
+        panels: slidingPanels,
+        hitMesh: slidingPanels[1].hitMesh,
+        leafMesh: slidingPanels[1].gMesh,
+        handleMesh: slidingPanels[1].handleMesh,
+        isOpen: false,
+        worldPos: new THREE.Vector3()
+    };
+
+    slidingPanels.forEach(p => {
+        p.hitMesh.userData.door = sliderData;
+        p.gMesh.userData.door = sliderData;
+        p.handleMesh.userData.door = sliderData;
+    });
+
+    interactiveDoors.push(sliderData);
+}
+
+// Porta de correr de 2 folhas (Ex: Suíte 1 para Varanda Técnica)
+function buildSlidingDoor2Leaves(group, start, w, sill, h, thick, op) {
+    const doorH = h;
+    const numPanels = 2;
+    const overlap = 0.06;
+    const panelW = (w + overlap) / 2;
+    const sashThick = 0.045;
+    const frameDepth = 0.035;
+
+    // Moldura do vão (marco em alumínio)
+    const frameThick = 0.04;
+    const trackH = 0.03;
+
+    // Trilho inferior
+    const botTrackGeo = new THREE.BoxGeometry(w, trackH, thick * 0.75);
+    const botTrack = new THREE.Mesh(botTrackGeo, frameMaterial);
+    botTrack.position.set(start + w / 2, sill + trackH / 2, 0);
+    group.add(botTrack);
+
+    // Trilho superior
+    const topTrackGeo = new THREE.BoxGeometry(w, trackH, thick * 0.75);
+    const topTrack = new THREE.Mesh(topTrackGeo, frameMaterial);
+    topTrack.position.set(start + w / 2, sill + doorH - trackH / 2, 0);
+    group.add(topTrack);
+
+    // Montantes verticais laterais do marco
+    const jambGeo = new THREE.BoxGeometry(frameThick, doorH, thick * 0.75);
+    const leftJamb = new THREE.Mesh(jambGeo, frameMaterial);
+    leftJamb.position.set(start + frameThick / 2, sill + doorH / 2, 0);
+    group.add(leftJamb);
+
+    const rightJamb = new THREE.Mesh(jambGeo, frameMaterial);
+    rightJamb.position.set(start + w - frameThick / 2, sill + doorH / 2, 0);
+    group.add(rightJamb);
+
+    // Duas folhas de correr (Folha 0 fixa / esquerda, Folha 1 móvel / direita deslizando sobre trilho interno)
+    const panels = [];
+    for (let i = 0; i < numPanels; i++) {
+        const basePx = start + frameThick + (panelW - overlap) * i + panelW / 2;
+        const pz = (i === 0 ? -0.018 : 0.018);
+
+        const panelGrp = new THREE.Group();
+        panelGrp.position.set(basePx, sill, pz);
+
+        const netH = doorH - trackH * 2;
+
+        // Perfis horizontais da folha
+        const horizGeo = new THREE.BoxGeometry(panelW, sashThick, frameDepth);
+        const topSash = new THREE.Mesh(horizGeo, frameMaterial);
+        topSash.position.set(0, doorH - trackH - sashThick / 2, 0);
+        panelGrp.add(topSash);
+
+        const botSash = new THREE.Mesh(horizGeo, frameMaterial);
+        botSash.position.set(0, trackH + sashThick / 2, 0);
+        panelGrp.add(botSash);
+
+        // Perfis verticais da folha
+        const vertH = netH - sashThick * 2;
+        const vertGeo = new THREE.BoxGeometry(sashThick, vertH, frameDepth);
+        const leftSash = new THREE.Mesh(vertGeo, frameMaterial);
+        leftSash.position.set(-panelW / 2 + sashThick / 2, sill + doorH / 2 - sill, 0);
+        panelGrp.add(leftSash);
+
+        const rightSash = new THREE.Mesh(vertGeo, frameMaterial);
+        rightSash.position.set(panelW / 2 - sashThick / 2, sill + doorH / 2 - sill, 0);
+        panelGrp.add(rightSash);
+
+        // Painel de vidro
+        const gGeo = new THREE.BoxGeometry(panelW - sashThick * 2, vertH, 0.01);
+        const gMesh = new THREE.Mesh(gGeo, glassMaterial);
+        gMesh.position.set(0, sill + doorH / 2 - sill, 0);
+        panelGrp.add(gMesh);
+
+        // Fecho concha / puxador embutido
+        const handleGeo = new THREE.BoxGeometry(0.02, 0.22, 0.03);
+        const handleMesh = new THREE.Mesh(handleGeo, chromeMat);
+        const hx = (i === 0 ? panelW / 2 - sashThick - 0.015 : -panelW / 2 + sashThick + 0.015);
+        handleMesh.position.set(hx, 1.05, 0);
+        panelGrp.add(handleMesh);
+
+        // Hitbox invisível
+        const hitGeo = new THREE.BoxGeometry(panelW, doorH, 0.12);
+        const hitMat = new THREE.MeshBasicMaterial({ visible: false });
+        const hitMesh = new THREE.Mesh(hitGeo, hitMat);
+        hitMesh.position.set(0, doorH / 2, 0);
+        panelGrp.add(hitMesh);
+
+        group.add(panelGrp);
+
+        // Folha 1 é deslizante (desliza para trás da folha 0)
+        const slideOffset = (i === 0) ? 0 : -(panelW - overlap * 1.2);
+        panels.push({
+            group: panelGrp,
+            baseX: basePx,
+            slideOffset: slideOffset,
+            currentX: basePx,
+            targetX: basePx,
+            hitMesh: hitMesh,
+            handleMesh: handleMesh,
+            gMesh: gMesh
+        });
+    }
+
+    // Registrar como porta de correr 2 folhas interativa
+    const doorData = {
+        id: (op && op.label) || 'porta_correr_suite1',
+        label: (op && op.label) || 'Porta de Correr Suíte 1',
+        type: 'sliding_2f',
+        group: group,
+        panels: panels,
+        hitMesh: panels[1].hitMesh,
+        leafMesh: panels[1].gMesh,
+        handleMesh: panels[1].handleMesh,
+        isOpen: false,
+        worldPos: new THREE.Vector3()
+    };
+
+    panels.forEach(p => {
+        p.hitMesh.userData.door = doorData;
+        p.gMesh.userData.door = doorData;
+        p.handleMesh.userData.door = doorData;
+    });
+
+    interactiveDoors.push(doorData);
 }
 
 // Interactive Door Frame & Leaf (Starts Closed, Opens on Click/Proximity)
@@ -4130,7 +4328,17 @@ function buildRoomLabels() {
 function toggleDoor(door) {
     if (!door) return;
     door.isOpen = !door.isOpen;
-    door.targetAngle = door.isOpen ? door.openAngle : 0.0;
+
+    if (door.type === 'sliding_telescopic' || door.type === 'sliding_2f') {
+        if (door.panels) {
+            door.panels.forEach(p => {
+                p.targetX = door.isOpen ? (p.baseX + p.slideOffset) : p.baseX;
+            });
+        }
+    } else {
+        door.targetAngle = door.isOpen ? door.openAngle : 0.0;
+    }
+
     showDoorToast(`${door.isOpen ? 'Abrindo' : 'Fechando'} ${door.label}...`);
     updateNearestDoorHUD();
 }
@@ -4152,6 +4360,13 @@ function checkDoorClick(clientX, clientY) {
 
     const hitTargets = [];
     interactiveDoors.forEach(d => {
+        if (d.panels) {
+            d.panels.forEach(p => {
+                if (p.hitMesh) hitTargets.push(p.hitMesh);
+                if (p.handleMesh) hitTargets.push(p.handleMesh);
+                if (p.gMesh) hitTargets.push(p.gMesh);
+            });
+        }
         if (d.hitMesh) hitTargets.push(d.hitMesh);
         if (d.leafMesh) hitTargets.push(d.leafMesh);
         if (d.handleMesh) hitTargets.push(d.handleMesh);
@@ -4184,15 +4399,18 @@ function updateNearestDoorHUD() {
     }
 
     let closest = null;
-    let minDist = 2.2;
+    let minDist = 2.4;
     const camPos = camera.position;
 
     interactiveDoors.forEach(d => {
-        d.pivot.getWorldPosition(tempDoorPos);
-        const dist = camPos.distanceTo(tempDoorPos);
-        if (dist < minDist) {
-            minDist = dist;
-            closest = d;
+        const targetObj = d.pivot || d.hitMesh || d.group;
+        if (targetObj) {
+            targetObj.getWorldPosition(tempDoorPos);
+            const dist = camPos.distanceTo(tempDoorPos);
+            if (dist < minDist) {
+                minDist = dist;
+                closest = d;
+            }
         }
     });
 
@@ -4804,9 +5022,20 @@ function animate() {
     const dt = Math.min(clock.getDelta(), 0.1);
 
     interactiveDoors.forEach(d => {
-        if (Math.abs(d.currentAngle - d.targetAngle) > 0.001) {
-            d.currentAngle = THREE.MathUtils.lerp(d.currentAngle, d.targetAngle, dt * 7.5);
-            d.pivot.rotation.y = d.currentAngle;
+        if (d.type === 'sliding_telescopic' || d.type === 'sliding_2f') {
+            if (d.panels) {
+                d.panels.forEach(p => {
+                    if (Math.abs(p.currentX - p.targetX) > 0.001) {
+                        p.currentX = THREE.MathUtils.lerp(p.currentX, p.targetX, dt * 7.5);
+                        p.group.position.x = p.currentX;
+                    }
+                });
+            }
+        } else if (d.pivot) {
+            if (Math.abs(d.currentAngle - d.targetAngle) > 0.001) {
+                d.currentAngle = THREE.MathUtils.lerp(d.currentAngle, d.targetAngle, dt * 7.5);
+                d.pivot.rotation.y = d.currentAngle;
+            }
         }
     });
 
@@ -4830,6 +5059,9 @@ window.setupLighting = setupLighting;
 window.setObserverHeight = setObserverHeight;
 window.toggleDoor = toggleDoor;
 window.triggerNearestDoor = triggerNearestDoor;
+window.interactiveDoors = interactiveDoors;
+window.camera = camera;
+window.orbitControls = orbitControls;
 window.toggleCeiling = function(checked) { ceilingGroup.visible = checked; };
 window.toggleOverlay = function(checked) { if (floorPlanMesh) floorPlanMesh.visible = checked; };
 window.toggleLabels = function(checked) { if (currentMode !== 'fps') labelsGroup.visible = checked; };

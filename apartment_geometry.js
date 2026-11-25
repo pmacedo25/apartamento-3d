@@ -770,12 +770,12 @@ window.APARTMENT_GEOMETRY = {
       "type": "exterior",
       "openings": [
         {
-          "type": "sliding_window",
-          "start": 0.4,
-          "width": 1.8,
-          "sill": 0.85,
-          "height": 1.4,
-          "label": "Janela Suíte 1 (Varanda Técnica)"
+          "type": "sliding_door_2f",
+          "start": 0.35,
+          "width": 2.0,
+          "height": 2.45,
+          "sill": 0.05,
+          "label": "Porta de Correr Suíte 1 / Varanda Técnica"
         }
       ]
     },

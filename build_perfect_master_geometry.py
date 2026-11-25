@@ -388,11 +388,11 @@ walls = [
     },
     {
         "id": "int_suite1_south_facade_window",
-        # JANELA DA SUÍTE 1 NA FACHADA SUL (Esquadria de correr para varanda técnica)
+        # ESQUADRIA / PORTA-BALCÃO DE CORRER DA SUÍTE 1 PARA TERRAÇO TÉCNICO (2 Folhas de Correr com peitoril baixo / soleira)
         "x1": 10.15, "z1": 7.65, "x2": 12.86, "z2": 7.65,
         "thick": 0.19, "height": 2.70, "type": "exterior",
         "openings": [
-            {"type": "sliding_window", "start": 0.40, "width": 1.80, "sill": 0.85, "height": 1.40, "label": "Janela Suíte 1 (Varanda Técnica)"}
+            {"type": "sliding_door_2f", "start": 0.35, "width": 2.00, "height": 2.45, "sill": 0.05, "label": "Porta de Correr Suíte 1 / Varanda Técnica"}
         ]
     },
 
