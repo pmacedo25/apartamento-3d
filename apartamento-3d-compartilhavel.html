@@ -3094,7 +3094,7 @@ function init() {
 
         // Scene
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xf0f3f6);
+        scene.background = new THREE.Color(0x16181d);
         scene.fog = null;
 
         // Camera
@@ -3209,14 +3209,14 @@ function showDoorToast(msg) {
 // Procedural Canvas Textures for PBR (High albedo, bright and clean)
 function initTextures() {
     try {
-        // 1. Porcelain Tile (Living / Kitchen / Hall)
+        // 1. Porcelain Tile (Living / Kitchen / Hall) - Light Grey contrasting with white walls
         const cvPorcelain = document.createElement('canvas');
         cvPorcelain.width = 256; cvPorcelain.height = 256;
         const ctxP = cvPorcelain.getContext('2d');
-        ctxP.fillStyle = '#f7f5ef';
+        ctxP.fillStyle = '#b8bec6';
         ctxP.fillRect(0, 0, 256, 256);
-        ctxP.strokeStyle = '#e3ded3';
-        ctxP.lineWidth = 3;
+        ctxP.strokeStyle = '#9ca4ae';
+        ctxP.lineWidth = 4;
         ctxP.strokeRect(1, 1, 254, 254);
         const texPorcelain = new THREE.CanvasTexture(cvPorcelain);
         texPorcelain.wrapS = THREE.RepeatWrapping;
@@ -3239,28 +3239,28 @@ function initTextures() {
         texWood.wrapT = THREE.RepeatWrapping;
         textures.wood = texWood;
 
-        // 3. Terrace Outdoor Tile (Gourmet)
+        // 3. Terrace Outdoor Tile (Gourmet) - Distinct Outdoor Grey
         const cvTerrace = document.createElement('canvas');
         cvTerrace.width = 256; cvTerrace.height = 256;
         const ctxT = cvTerrace.getContext('2d');
-        ctxT.fillStyle = '#c7c0b3';
+        ctxT.fillStyle = '#a8b0b8';
         ctxT.fillRect(0, 0, 256, 256);
-        ctxT.strokeStyle = '#a69f91';
-        ctxT.lineWidth = 3;
+        ctxT.strokeStyle = '#858e98';
+        ctxT.lineWidth = 4;
         ctxT.strokeRect(1, 1, 254, 254);
         const texTerrace = new THREE.CanvasTexture(cvTerrace);
         texTerrace.wrapS = THREE.RepeatWrapping;
         texTerrace.wrapT = THREE.RepeatWrapping;
         textures.terrace = texTerrace;
 
-        // 4. Bath Tile / Ceramic
+        // 4. Bath Tile / Ceramic - Soft Light Grey Tile
         const cvBath = document.createElement('canvas');
         cvBath.width = 256; cvBath.height = 256;
         const ctxB = cvBath.getContext('2d');
-        ctxB.fillStyle = '#f2efe9';
+        ctxB.fillStyle = '#b2b8c0';
         ctxB.fillRect(0, 0, 256, 256);
-        ctxB.strokeStyle = '#d4cfc5';
-        ctxB.lineWidth = 3;
+        ctxB.strokeStyle = '#929aa5';
+        ctxB.lineWidth = 4;
         ctxB.strokeRect(1, 1, 254, 254);
         const texBath = new THREE.CanvasTexture(cvBath);
         texBath.wrapS = THREE.RepeatWrapping;
@@ -3282,9 +3282,9 @@ function setupLighting(preset = 'day') {
     ceilingLights = [];
 
     if (preset === 'day') {
-        scene.background = new THREE.Color(0xf0f3f6);
+        scene.background = new THREE.Color(0x16181d);
 
-        hemiLight = new THREE.HemisphereLight(0xffffff, 0xdfe5ed, 0.95);
+        hemiLight = new THREE.HemisphereLight(0xffffff, 0x4a505b, 0.95);
         scene.add(hemiLight);
 
         dirLight = new THREE.DirectionalLight(0xfffbf2, 0.85);
@@ -3409,18 +3409,18 @@ function buildFloors() {
 
     // Base ground slab underneath apartment
     const slabGeo = new THREE.BoxGeometry(15, 0.2, 13);
-    const slabMat = new THREE.MeshStandardMaterial({ color: 0xe2e6eb, roughness: 0.9 });
+    const slabMat = new THREE.MeshStandardMaterial({ color: 0x1f2229, roughness: 0.9 });
     const slabMesh = new THREE.Mesh(slabGeo, slabMat);
     slabMesh.position.set(6.87, -0.1, 5.72);
     floorsGroup.add(slabMesh);
 }
 
 // Materials
-const wallMaterial = new THREE.MeshStandardMaterial({ color: 0xfcfbfa, roughness: 0.75, metalness: 0.0 });
+const wallMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.65, metalness: 0.0 });
 const baseboardMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35 });
-const pillarMaterial = new THREE.MeshStandardMaterial({ color: 0xe6e4df, roughness: 0.80, metalness: 0.05 });
-const shaftMaterial = new THREE.MeshStandardMaterial({ color: 0xf8f6f0, roughness: 0.75, metalness: 0.0 });
-const beamMaterial = new THREE.MeshStandardMaterial({ color: 0xf4f2ee, roughness: 0.80, metalness: 0.0 });
+const pillarMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.65, metalness: 0.0 });
+const shaftMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.65, metalness: 0.0 });
+const beamMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.65, metalness: 0.0 });
 const graniteBlackMat = new THREE.MeshStandardMaterial({ color: 0x242528, roughness: 0.25, metalness: 0.1 });
 const marbleLightMat = new THREE.MeshStandardMaterial({ color: 0xf2eee7, roughness: 0.20, metalness: 0.05 });
 const ceramicWhiteMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.15, metalness: 0.05 });
