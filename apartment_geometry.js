@@ -655,6 +655,17 @@ window.APARTMENT_GEOMETRY = {
       "openings": []
     },
     {
+      "id": "int_lavabo_east_wall",
+      "x1": 9.95,
+      "z1": 0.44,
+      "x2": 9.95,
+      "z2": 2.13,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
+    },
+    {
       "id": "int_lavabo_south_wall",
       "x1": 8.7,
       "z1": 2.13,
@@ -729,6 +740,17 @@ window.APARTMENT_GEOMETRY = {
           "label": "Porta Acesso Quartos"
         }
       ]
+    },
+    {
+      "id": "int_bath1_north_wall",
+      "x1": 10.15,
+      "z1": 3.18,
+      "x2": 11.8,
+      "z2": 3.18,
+      "thick": 0.14,
+      "height": 2.7,
+      "type": "interior",
+      "openings": []
     },
     {
       "id": "int_bath1_suite1_div",

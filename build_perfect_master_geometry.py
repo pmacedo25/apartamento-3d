@@ -330,6 +330,13 @@ walls = [
     # 6. LAVABO & HALL SOCIAL (INTERIOR)
     # =========================================================================
     {
+        "id": "int_lavabo_east_wall",
+        # Parede leste divisória do Lavabo com o Hall Social (100% sólida e contínua)
+        "x1": 9.95, "z1": 0.44, "x2": 9.95, "z2": 2.13,
+        "thick": 0.14, "height": 2.70, "type": "interior",
+        "openings": []
+    },
+    {
         "id": "int_lavabo_south_wall",
         "x1": 8.70, "z1": 2.13, "x2": 9.95, "z2": 2.13,
         "thick": 0.14, "height": 2.70, "type": "interior",
@@ -375,6 +382,13 @@ walls = [
     # =========================================================================
     # 9. SUÍTE 1, BANHO 1 & TERRAÇO TÉCNICO (INTERIOR)
     # =========================================================================
+    {
+        "id": "int_bath1_north_wall",
+        # Parede norte divisória do Banho 1 com o Hall Social (fechamento completo de X=10.15 a 11.80m)
+        "x1": 10.15, "z1": 3.18, "x2": 11.80, "z2": 3.18,
+        "thick": 0.14, "height": 2.70, "type": "interior",
+        "openings": []
+    },
     {
         "id": "int_bath1_suite1_div",
         "x1": 10.15, "z1": 4.81, "x2": 12.86, "z2": 4.81,
