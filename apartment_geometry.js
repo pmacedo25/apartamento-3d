@@ -15,7 +15,7 @@ window.APARTMENT_GEOMETRY = {
         4.7,
         1.98,
         10.15,
-        6.6
+        6.75
       ],
       "floor": "tile_light",
       "spawn": [
@@ -121,7 +121,7 @@ window.APARTMENT_GEOMETRY = {
       "area": 4.5,
       "box": [
         7.28,
-        6.6,
+        6.75,
         10.15,
         8.36
       ],
@@ -129,7 +129,7 @@ window.APARTMENT_GEOMETRY = {
       "spawn": [
         8.6,
         1.6,
-        7.2,
+        7.3,
         1.57
       ]
     },
@@ -713,14 +713,22 @@ window.APARTMENT_GEOMETRY = {
     },
     {
       "id": "int_living_to_corridor",
-      "x1": 4.7,
-      "z1": 6.6,
-      "x2": 8.43,
-      "z2": 6.6,
-      "thick": 0.15,
+      "x1": 7.28,
+      "z1": 6.75,
+      "x2": 10.15,
+      "z2": 6.75,
+      "thick": 0.14,
       "height": 2.7,
       "type": "interior",
-      "openings": []
+      "openings": [
+        {
+          "type": "door",
+          "start": 1.2,
+          "width": 0.85,
+          "height": 2.1,
+          "label": "Porta Acesso Quartos"
+        }
+      ]
     },
     {
       "id": "int_bath1_suite1_div",

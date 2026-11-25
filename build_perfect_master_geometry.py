@@ -16,7 +16,7 @@ rooms = [
         "id": "sala",
         "name": "Living & Estar / Jantar",
         "area": 24.35,
-        "box": [4.70, 1.98, 10.15, 6.60],
+        "box": [4.70, 1.98, 10.15, 6.75],
         "floor": "tile_light",
         "spawn": [7.00, 1.60, 4.40, -1.57]
     },
@@ -64,9 +64,9 @@ rooms = [
         "id": "circulacao",
         "name": "Circulação Íntima & Roupeiro",
         "area": 4.50,
-        "box": [7.28, 6.60, 10.15, 8.36],
+        "box": [7.28, 6.75, 10.15, 8.36],
         "floor": "wood",
-        "spawn": [8.60, 1.60, 7.20, 1.57]
+        "spawn": [8.60, 1.60, 7.30, 1.57]
     },
     {
         "id": "suite_master",
@@ -359,13 +359,17 @@ walls = [
     },
 
     # =========================================================================
-    # 8. LIVING / CIRCULAÇÃO ÍNTIMA
+    # 8. LIVING / CIRCULAÇÃO ÍNTIMA DOS QUARTOS
     # =========================================================================
     {
         "id": "int_living_to_corridor",
-        "x1": 4.70, "z1": 6.60, "x2": 8.43, "z2": 6.60,
-        "thick": 0.15, "height": 2.70, "type": "interior",
-        "openings": []
+        # Parede divisória contínua entre Living e Circulação Íntima (Z = 6.75m de X = 7.28m a X = 10.15m, total 2.87m)
+        # Contém a porta/vão de acesso aos quartos (L = 0.85m, h = 2.10m)
+        "x1": 7.28, "z1": 6.75, "x2": 10.15, "z2": 6.75,
+        "thick": 0.14, "height": 2.70, "type": "interior",
+        "openings": [
+            {"type": "door", "start": 1.20, "width": 0.85, "height": 2.10, "label": "Porta Acesso Quartos"}
+        ]
     },
 
     # =========================================================================
