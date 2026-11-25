@@ -40,12 +40,13 @@ old_scripts = """  <!-- Local Libraries & Geometry Scripts -->
 if old_scripts in html:
     single_html = html.replace(old_scripts, script_replacement)
 else:
-    # Fallback replace
-    lines = html.split('\n')
-    filtered = [l for l in lines if not any(s in l for s in ['lib/three', 'OrbitControls', 'plan_image_b64', 'apartment_geometry', 'app.js'])]
-    body_idx = [i for i, l in enumerate(filtered) if '</body>' in l][0]
-    filtered.insert(body_idx, script_replacement)
-    single_html = '\n'.join(filtered)
+    # Substitui o bloco inteiro (scripts externos + fallbacks de CDN) de uma vez,
+    # sem filtrar linha a linha (isso mutilava os <script> de fallback e deixava '}' solto).
+    import re
+    block = re.compile(r'[ \t]*<script src="lib/three\.min\.js"></script>.*?<script src="app\.js"></script>', re.S)
+    if not block.search(html):
+        raise SystemExit("ERRO: bloco de scripts nao encontrado em index.html")
+    single_html = block.sub(lambda m: script_replacement, html, count=1)
 
 out_path = os.path.join(base_dir, 'apartamento-3d-compartilhavel.html')
 with open(out_path, 'w', encoding='utf-8') as f:

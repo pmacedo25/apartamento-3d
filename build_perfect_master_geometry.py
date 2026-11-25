@@ -560,7 +560,6 @@ geometry_export = {
 
 with open("apartment_geometry.js", "w", encoding="utf-8") as out_f:
     out_f.write("window.APARTMENT_GEOMETRY = " + json.dumps(geometry_export, indent=2, ensure_ascii=False) + ";\n")
-    out_f.write("const APARTMENT_DATA = window.APARTMENT_GEOMETRY;\n")
 
 # Also write to build_geometry.py as Python dicts
 import pprint

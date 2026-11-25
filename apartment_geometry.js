@@ -1326,4 +1326,3 @@ window.APARTMENT_GEOMETRY = {
     }
   ]
 };
-const APARTMENT_DATA = window.APARTMENT_GEOMETRY;
